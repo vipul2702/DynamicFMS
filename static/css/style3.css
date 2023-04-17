@@ -1,0 +1,57 @@
+body{
+    background-image: url("./pg.jpg");
+    padding: 0;
+    margin: 0;
+    background-size: cover;
+    height: 101vh;
+}
+header{
+    padding: 20px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    position: sticky;
+    top: 0;
+}
+.logobox{
+display: inline-block;
+width: 200px;
+font-size: large;
+font-weight: 600;
+}
+.navbox{
+width: 600px;
+display: inline-block;
+position: absolute;
+right: 20px;
+}
+.navbox a{
+color: white;
+padding: 20px;
+text-decoration: none;
+transition: all 0.5s;
+}
+.navbox a:hover{
+    color: indianred;
+}
+#home{
+    color: indianred;
+}
+.heading{
+    color: indianred;
+    font-size: 45px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+    top: 30px;
+    left: 70px;
+    width: 600px;
+
+}
+.heading+h3{
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    position: relative;
+    top: 10px;
+    left: 85px;
+    width: 600px;
+}

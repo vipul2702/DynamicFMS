@@ -4,98 +4,132 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>Document</title>
+    <style>
+      #main-header{
+    background-color: coral;
+    color: white;
+    /* padding-left: 30px; */
+}
+    </style>
   </head>
   <body>
-    {% for message in messages %}
-    <div
-      class="alert alert-{{ message.tags }} alert-dismissible fade show"
-      role="alert"
-    >
-      <strong>Message:</strong> {{ message }}
-      <button
-        type="button"
-        class="close"
-        data-dismiss="alert"
-        aria-lable="Close"
-      >
-        <span aria-hidden="true"></span>
-      </button>
+    <div class="bg-dark text-white">
+      <div class="container"> <h5> Fee Management System</h5></div>
     </div>
-    {% endfor %}
+    <div class="container">
+      <div class="jumbotron">
+        <h3 class="text-center">Create your account!</h3>
+        {% for message in messages %}
+        <div
+          class="alert alert-{{ message.tags }} alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Message:</strong> {{ message }}
+          <!-- <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-lable="Close"
+        >
+          <span aria-hidden="true"></span>
+        </button> -->
+        </div>
+        {% endfor %}
 
-    <h3>SignUp</h3>
+        <!-- <h3>SignUp</h3> -->
+        <form action="/signup" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for=""
+            >Username
+          </label>
+            <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            placeholder="Create a username (only letters and numbers)"
+            required
+            />
+          </div>
+        <div class="form-group">
+            <label for=""
+              >First Name
+            </label>
+              <input
+                type="text"
+                class="form-control"
+                id="fname"
+                name="fname"
+                placeholder="Enter Your First Name"
+                required
+              />
+            </div>
+            <div class="form-group">
+            <label for=""
+              >Last Name
+            </label>
+              <input
+                type="text"
+                class="form-control"
+                id="lname"
+                name="lname"
+                placeholder="Enter Your Last Name"
+                required
+              />
+              </div>
+              <div class="form-group">
+            <label for=""
+              >Email Address
+            </label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Enter Your Email Address"
+                required
+              />
+          </div>
+          <div class="form-group">
+            <label for=""
+              >Password
+            </label>
+              <input
+                type="password"
+                class="form-control"
+                id="pass1"
+                name="pass1"
+                placeholder="Create New Password"
+                required
+              />
+          </div>
+          <div class="form-group">
+            <label for=""
+              >Confirm Password
+            </label>
+              <input
+                type="password"
+                class="form-control"
+                id="pass2"
+                name="pass2"
+                placeholder="Confirm Your Password"
+                required
+              />
+          </div>
 
-    <form action="/signup" method="post">
-      {% csrf_token %}
-      <label for=""
-        >Username
-        <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Create a username (only letters and numbers)"
-          required
-        />
-      </label>
-      <br />
-      <label for=""
-        >First Name
-        <input
-          type="text"
-          id="fname"
-          name="fname"
-          placeholder="Enter Your First Name"
-          required
-        />
-      </label>
-      <br />
-      <label for=""
-        >Last Name
-        <input
-          type="text"
-          id="lname"
-          name="lname"
-          placeholder="Enter Your Last Name"
-          required
-        />
-      </label>
-      <br />
-      <label for=""
-        >Email Address
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Enter Your Email Address"
-          required
-        />
-      </label>
-      <br />
-      <label for=""
-        >Password
-        <input
-          type="password"
-          id="pass1"
-          name="pass1"
-          placeholder="Create New Password"
-          required
-        />
-      </label>
-      <br />
-      <label for=""
-        >Confirm Password
-        <input
-          type="password"
-          id="pass2"
-          name="pass2"
-          placeholder="Confirm Your Password"
-          required
-        />
-      </label>
-      <br />
-
-      <button type="submit">Sign Up</button>
-    </form>
+            <button type="submit" class="btn btn-outline-dark form-control">Sign Up</button>
+          
+        </div>
+          </form>
+    </div>
   </body>
 </html>
