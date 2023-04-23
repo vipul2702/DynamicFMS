@@ -6,11 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href='{% static "css/bootstrap.min.css" %}'/>
-
-    <script src="{% static 'js/bootstrap.esm.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <title>HomePage</title>
+    <title>Dashboard</title>
     <style>
       footer {
   position: fixed;
@@ -60,11 +56,19 @@
       .footer-right a:hover {
         text-decoration: underline;
       }
+      p{
+        padding: 3px;
+        margin-left: 60px;
+      }
+      div .black:hover{
+        width: 100%;
+        background-color: black;
+      }
     </style>
   </head>
-  <body>
+  <div>
     <div class="bg-dark text-white" style=" padding: 10px;">
-      <div class="container">
+      <div class="container ">
         <h5> Fees Management System</h5></div>
     </div>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark" style="padding: 10px;">
@@ -86,7 +90,7 @@
         </button>
 
         <!-- Navbar links -->
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <!-- <div class="collapse navbar-collapse" id="collapsibleNavbar">
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link" href="#">Home</a>
@@ -100,10 +104,11 @@
             
           </ul>
           
-        </div>
+        </div> -->
         <!--  <form class="form-inline my-lg-0"> -->
           <ul class="navbar-nav">
-          <li class="mx-2nav-item">
+            {% if not user.is_authenticated %}
+          <li class="nav-item">
             <a href="/signup">
               <button
                 type="submit"
@@ -120,13 +125,13 @@
               Sign In
             </button></a>    
           </li>
-          {% if user.is_authenticated %}
-          <li class="mx-2  nav-item">
+          {% else %}
+          <!-- <li class="mx-2  nav-item">
             <a href="/signout"
             ><button type="submit" class=" btn btn-outline-light form-control">
               Sign Out
             </button></a>    
-          </li>
+          </li> -->
           {% endif %}
           </ul>
           <!-- <li class="mx-2 nav-item"><input class="  form-control " type="search" placeholder="Search" aria-label="Search"> </li>
@@ -135,9 +140,7 @@
       </div>
     </nav>
 
-    <div class="alert alert-success alert-dismissible fade show">
-      <strong>Welcome to FMS!</strong> For Educational Institutions (simple & efficient Fees management system)
-    </div> <br> <br> <br><br><br>
+    
     <div class="container">
       <div class="jumbotron">
         {% for message in messages %}
@@ -158,20 +161,60 @@
         {% endfor %}
 
         <!-- <h3 class="text-center">Authentication </h3> -->
-<br> 
-        {% if user.is_authenticated %}
-        <h4 class="text-center">Welcome to Dashboard</h4>
+
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2 text-white "  style="background-color: rgb(48, 55, 55); height: 100vh;">
+      <div class="black">
+        <p class="pt-4">Dashboard</p>
+        <hr>
+      </div>
+      <div class="black">
+        <p>Branch</p>
+        <hr>
+      </div>
+      <div class="black">
+        <p>Students</p>
+        <hr>
+      </div>
+      <div class="black">
+        <p>Fees</p>
+        <hr>
+      </div>
+      <div class="black">
+        <p>Report</p>
+        <hr>
+      </div>
+      <div class="black">
+        <p>Setting</p>
+        <hr>
+      </div>
+      {% if user.is_authenticated %}
+      <div class="black">
+        <p><a href="/signout" style="text-decoration: none; color: white;">Logout</a></p>
+        <hr>
+      </div>
+      {% endif %}
+      </div>
+      <div class="col-sm-10">
+        <div class="mt-4 mx-4" style="background-color: rgb(249, 240, 230);">
+        <div  class="mx-3" style="height: 60vh; ">
+          <strong><h1> <u>DASHBOARD</u> </h1></strong> <br><hr>
+          {% if user.is_authenticated %}
+        <!-- <h4 class="text-center">Welcome to Dashboard</h4> -->
         <h3>Hello {{ fname }}&nbsp;{{ lname }}</h3>
         <h4>You're successfully logged in.</h4>
             
         </div>
-        {% else %}
-        <div class="row">
-        </div>
-
+        
         {% endif %}
+        </div> 
+        <!-- <p>hello</p> -->
       </div>
     </div>
+  </div>
     <footer>
       <div class="footer-container">
         <div class="footer-left">

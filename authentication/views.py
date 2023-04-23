@@ -129,11 +129,29 @@ def signin(request):
         if user is not None:
             login(request, user)
             fname = user.first_name
-            return render(request, "authentication/index.html", {'fname': fname})
+            lname = user.last_name
+            return render(request, "authentication/index.html", {'fname': fname, 'lname':lname})
         else:
             messages.error(request, "Bad Credentials")
             return redirect('home')
 
     return render(request, "authentication/signin.html")
 
+def dashboard(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        pass1 = request.POST['pass1']
+
+        user = authenticate(username=username, password=pass1)
+
+        if user is not None:
+            login(request, user)
+            fname = user.first_name
+            lname = user.last_name
+            return render(request, "authentication/dashboard.html", {'fname': fname, 'lname':lname})
+        else:
+            messages.error(request, "Bad Credentials")
+            return redirect('home')
+
+    return render(request, "authentication/dashboard.html")
 
