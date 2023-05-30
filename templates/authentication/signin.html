@@ -7,23 +7,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href=" {% static 'css/style.css' %}" />
+    <link
+      rel="shortcut icon"
+      href="{% static 'images/logo.png' %}"
+      type="image/x-icon"
+    />
+
     <script src="{% static 'js/bootstrap.esm.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <title>Sign In</title>
     <style>
+      body {
+        background-image: url("{% static 'images/cool.png' %}");
+        /* background-size: ; */
+        background-repeat: no-repeat;
+      }
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
       #main-header {
         background-color: black;
         color: white;
         padding: 20px;
         /* padding-left: 30px; */
       }
-      #bg {
+      /* #bg {
         background-image: url("{static'images/2.png'}");
-      }
+      } */
     </style>
   </head>
-  <body id="bg">
+  <body>
     <div class="bg-dark text-white">
       <div class="container">
         <h5 id="main-header">Fee Management System</h5>
@@ -37,14 +53,13 @@
     <br />
     <br />
     <div class="container" style="margin-left: 30%">
-      <div class="jumbotron">
-        {% for message in messages %}
-        <div
-          class="alert alert-{{ message.tags }} alert-dismissible fade show"
-          role="alert"
-        >
-          <strong>Message:</strong> {{ message }}
-          <!-- <button
+      {% for message in messages %}
+      <div
+        class="alert alert-{{ message.tags }} alert-dismissible fade show"
+        role="alert"
+      >
+        <strong>Message:</strong> {{ message }}
+        <!-- <button
         type="button"
         class="close"
         data-dismiss="alert"
@@ -52,47 +67,67 @@
       >
         <span aria-hidden="true"></span>
       </button> -->
-        </div>
-        {% endfor %}
+      </div>
+      {% endfor %}
 
-        <div class="card p-4" style="width: 40rem">
-          <h3 class="text-center mt-4">Log In to your account</h3>
-          <hr />
-          <form action="/dashboard" method="post">
-            {% csrf_token %}
-            <div class="form-group row">
-              <label for="" class="col-sm-2 col-form-label">Username </label>
-              <div class="col-sm-10" style="margin-bottom: 5px">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="username"
-                  name="username"
-                  placeholder="Enter Your Username (only letters and numbers)"
-                  required
-                />
-              </div>
+      <div class="card p-4" style="width: 40rem">
+        <h3 class="text-center mt-4">Log In to your account</h3>
+        <hr />
+        <form action="/dashboard" method="post">
+          {% csrf_token %}
+          <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label"
+              ><b> Username </b></label
+            >
+            <div class="col-sm-10" style="margin-bottom: 5px">
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                placeholder="Enter Your Username (only letters and numbers)"
+                required
+              />
             </div>
-            <div class="form-group row">
-              <label for="" class="col-sm-2 col-form-label">Password </label>
-              <div class="col-sm-10" style="margin-bottom: 5px">
-                <input
-                  type="password"
-                  class="form-control"
-                  id="pass1"
-                  name="pass1"
-                  placeholder="Enter Your Password"
-                  required
-                />
-              </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="col-sm-2 h2 col-form-label"
+              ><b> Password </b></label
+            >
+            <div class="col-sm-10" style="margin-bottom: 5px">
+              <input
+                type="password"
+                class="form-control"
+                id="pass1"
+                name="pass1"
+                placeholder="Enter Your Password"
+                required
+              />
             </div>
-            <br />
-            <a href=""></a>
-            <button type="submit" class="btn btn-warning form-control">
-              Sign In
-            </button>
-          </form>
-        </div>
+          </div>
+          <br />
+          <a href=""></a>
+          <button type="submit" class="btn btn-warning form-control">
+            Sign In
+          </button>
+          <br />
+          <br />
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckChecked"
+              unchecked
+            />
+            <label class="form-check-label" for="flexSwitchCheckChecked"
+              >Remember me</label
+            >
+            <a class="float-end" href="/forgetpassword.html"
+              >Forgot your password?</a
+            >
+          </div>
+        </form>
       </div>
     </div>
   </body>

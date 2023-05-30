@@ -39,23 +39,23 @@ def signup(request):
         # pass2 = request.POST['pass2']
 
         if User.objects.filter(username=username):
-                messages.error(request, "Username already exist! please try some other username")
+                messages.warning(request, "Username already exist! please try some other username")
                 return redirect('home')
 
         if User.objects.filter(email=email):
-            messages.error(request, "Email already registered")  
+            messages.warning(request, "Email already registered")  
             return redirect('home')
 
         if len(username)>20:
-            messages.error(request, "Username must be under 20 characters")
+            messages.warning(request, "Username must be under 20 characters")
             return redirect('home')
 
         if pass1 != pass2:
-            messages.error(request, "Password didn't match")
+            messages.warning(request, "Password didn't match")
             return redirect('home')
 
         if not username.isalnum():
-            messages.error(request, "Username must be Alpha-Numeric!")    
+            messages.warning(request, "Username must be Alpha-Numeric!")    
             return redirect('home')
 
         myuser = User.objects.create_user(username, email, pass1)
@@ -150,8 +150,11 @@ def dashboard(request):
             lname = user.last_name
             return render(request, "authentication/dashboard.html", {'fname': fname, 'lname':lname})
         else:
-            messages.error(request, "Bad Credentials")
+            messages.error(request, "Invalid User!")
             return redirect('home')
 
     return render(request, "authentication/dashboard.html")
+
+def forgetpassword(request):
+    return render(request, 'forgetpassword.html')
 

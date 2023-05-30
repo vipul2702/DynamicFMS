@@ -3,15 +3,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="https://dribbble.com/shots/16431923-W-icon/attachments/10978206?mode=media" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href='{% static "css/bootstrap.min.css" %}' />
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
 
     <script src="{% static 'js/bootstrap.esm.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <title>HomePage</title>
     <style>
+      body{
+        background-image: url("{% static 'images/st.jpg' %}");
+        background-size: 100vw 100vh;
+        background-repeat: no-repeat;
+      }
+
+
+
+      
       footer {
         position: fixed;
         bottom: 0;
@@ -151,16 +162,11 @@
         efficient Fees management system)
       </h4>
     </div>
-    <img
-    style="height: 100%; width: 100%; padding-bottom: 10%"
-    src="{% static 'images/home1.jpg' %}"
-    class="img-fluid"
-    alt="..."
-  />
+    
     <div class="container">
       {% for message in messages %}
       <div
-        class="alert alert-{{ message.tags }} alert-dismissible fade show"
+        class="alert alert-warning  alert-{{ message.tags }} alert-dismissible fade show"
         role="alert"
       >
         <h3><strong> Message: </strong> {{ message }}</h3>
@@ -183,7 +189,11 @@
     </div>
     {% else %} {% endif %}
 </div>
-    <div class="center"></div>
+    <!-- <center class="" > <img style="opacity: 0.5;
+    "
+       src="{% static 'images/st.jpg' %}" width="1200" height="450"
+    /></center> -->
+    
   
 
     <footer>
