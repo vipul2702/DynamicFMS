@@ -1,0 +1,260 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Payment Receipt</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: #f7f7f7;
+      }
+
+      .container h2 {
+        text-align: center;
+      }
+
+      .receipt-info {
+        margin-bottom: 20px;
+      }
+
+      .receipt-info span {
+        font-weight: bold;
+      }
+
+      .receipt-details {
+        margin-bottom: 20px;
+      }
+
+      .receipt-details label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .receipt-details p {
+        margin: 0;
+      }
+
+      .receipt-amount {
+        margin-bottom: 20px;
+      }
+
+      .receipt-amount label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .receipt-amount p {
+        margin: 0;
+      }
+
+      .receipt-remarks {
+        margin-bottom: 20px;
+      }
+
+      .receipt-remarks label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .receipt-remarks p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Payment Receipt</h2>
+      <div class="receipt-info">
+        <p><span>Month:</span> May</p>
+        <p><span>Year:</span> 2023</p>
+        <p><span>Date:</span> May 31, 2023</p>
+        <p><span>ID Number:</span> 123456</p>
+      </div>
+      <div class="receipt-details">
+        <label>Registration ID:</label>
+        <p>ABC123456</p>
+        <label>Name:</label>
+        <p>John Doe</p>
+      </div>
+      <div class="receipt-amount">
+        <label>Paid Amount:</label>
+        <p>$100.00</p>
+      </div>
+      <div class="receipt-remarks">
+        <label>Remarks:</label>
+        <p>Payment for registration fees.</p>
+      </div>
+    </div>
+  </body>
+</html> 
+ <!DOCTYPE html>
+<html>
+  <head>
+    <title>Payment Receipt</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      .receipt-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .receipt-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .receipt-container p {
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="receipt-container">
+      <h2>Payment Receipt</h2>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>ID Number</th>
+          <th>Registration ID</th>
+          <th>Name</th>
+          <th>Paid Amount</th>
+          <th>Remarks</th>
+        </tr>
+        <tr>
+          <td>May 31, 2023</td>
+          <td>12345</td>
+          <td>ABC123</td>
+          <td>John Doe</td>
+          <td>$100</td>
+          <td>Payment received for XYZ service</td>
+        </tr>
+      </table>
+      <p>Thank you for your payment!</p>
+    </div>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Payment Receipt</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: #f7f7f7;
+      }
+
+      .container h2 {
+        text-align: center;
+      }
+
+      .receipt-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+
+      .receipt-table th,
+      .receipt-table td {
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+
+      .receipt-table th {
+        text-align: left;
+        font-weight: bold;
+        background-color: #f2f2f2;
+      }
+
+      .receipt-table td.remarks {
+        vertical-align: top;
+      }
+
+      .print-button {
+        text-align: center;
+      }
+
+      .print-button button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .print-button button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Payment Receipt</h2>
+      <table class="receipt-table">
+        <tr>
+          <th>Date:</th>
+          <td>June 1, 2023</td>
+        </tr>
+        <tr>
+          <th>ID Number:</th>
+          <td>12345</td>
+        </tr>
+        <tr>
+          <th>Registration ID:</th>
+          <td>67890</td>
+        </tr>
+        <tr>
+          <th>Name:</th>
+          <td>John Doe</td>
+        </tr>
+        <tr>
+          <th>Paid Amount:</th>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <th>Remarks:</th>
+          <td class="remarks">Payment for college application fee.</td>
+        </tr>
+      </table>
+      <div class="print-button">
+        <button onclick="window.print()">Print Receipt</button>
+      </div>
+    </div>
+  </body>
+</html>

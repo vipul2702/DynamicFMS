@@ -136,18 +136,21 @@ def signin(request):
             return redirect('home')
 
     return render(request, "authentication/signin.html")
-
 def dashboard(request):
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['pass1']
-
+        
         user = authenticate(username=username, password=pass1)
 
         if user is not None:
             login(request, user)
             fname = user.first_name
             lname = user.last_name
+            global email 
+            email = user.email
+            print(email)
+            print("i love you jaan")
             return render(request, "authentication/dashboard.html", {'fname': fname, 'lname':lname})
         else:
             messages.error(request, "Invalid User!")
@@ -158,3 +161,26 @@ def dashboard(request):
 def forgetpassword(request):
     return render(request, 'forgetpassword.html')
 
+def admissionform(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        pass1 = request.POST['pass1']
+        
+        user = authenticate(username=username, password=pass1)
+
+        if user is not None:
+            login(request, user)
+            fname = user.first_name
+            lname = user.last_name
+            global email 
+            email = user.email
+            print(email)
+            print("i love you jaan")
+            return render(request, "authentication/admissionform.html", {'fname': fname, 'lname':lname})
+        else:
+            messages.error(request, "Invalid User!")
+            return redirect('home')
+    return render(request, "authentication/admissionform.html")
+
+def onlinepayment(request):
+    return render(request, "authentication/onlinepayment.html")
