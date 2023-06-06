@@ -12,7 +12,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth import authenticate, login, logout
 from . tokens import generate_token
-
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -136,6 +136,8 @@ def signin(request):
             return redirect('home')
 
     return render(request, "authentication/signin.html")
+
+# @login_required
 def dashboard(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -182,5 +184,17 @@ def admissionform(request):
             return redirect('home')
     return render(request, "authentication/admissionform.html")
 
-def onlinepayment(request):
-    return render(request, "authentication/onlinepayment.html")
+def payment(request):
+    return render(request, "authentication/payment.html")
+
+def profile(request):
+    return render(request, "authentication/profile.html")
+
+def feereceipt(request):
+    return render(request, "authentication/feereceipt.html")
+
+def helo(request):
+    return render(request, "authentication/helo.html")
+
+def setting(request):
+    return render(request, "authentication/setting.html")

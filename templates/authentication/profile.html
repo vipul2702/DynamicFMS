@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Profile</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+      }
+
+      .profile-picture {
+        max-width: 200px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .section-heading {
+        margin: 0;
+        color: #333;
+      }
+
+      .section-content {
+        margin-bottom: 20px;
+      }
+
+      .section-content p {
+        margin: 5px 0;
+        color: #666;
+      }
+
+      .section-content table {
+        width: 100%;
+        margin-bottom: 10px;
+        border-collapse: collapse;
+      }
+
+      .section-content th,
+      .section-content td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .section-content th {
+        background-color: #f4f4f4;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        class="profile-picture"
+        src="{% static 'images/profile.jpg' %}"
+        alt="Profile Picture"
+      />
+      {% if user.is_authenticated %}
+      <h4 class="text-center">Welcome to Dashboard</h4>
+      <h3>Hello {{ fname }}&nbsp;{{ lname }}</h3>
+      <h4>You're successfully logged in.</h4>
+
+      {% endif %}
+      <div class="section-content">
+        <h2 class="section-heading">Personal Information</h2>
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Date of Birth:</strong> January 1, 2000</p>
+        <p><strong>Email:</strong> johndoe@example.com</p>
+        <p><strong>Phone:</strong> +1 123 456 7890</p>
+        <p><strong>Address:</strong> 123 Main Street, City, State, ZIP</p>
+      </div>
+      <div class="section-content">
+        <h2 class="section-heading">Family Information</h2>
+        <table>
+          <tr>
+            <th>Relation</th>
+            <th>Name</th>
+            <th>Occupation</th>
+          </tr>
+          <tr>
+            <td>Parent</td>
+            <td>Jane Doe</td>
+            <td>Engineer</td>
+          </tr>
+          <tr>
+            <td>Parent</td>
+            <td>John Doe Sr.</td>
+            <td>Doctor</td>
+          </tr>
+          <tr>
+            <td>Sibling</td>
+            <td>Jennifer Doe</td>
+            <td>Student</td>
+          </tr>
+        </table>
+      </div>
+      <div class="section-content">
+        <h2 class="section-heading">Educational Information</h2>
+        <p><strong>University:</strong> XYZ University</p>
+        <p><strong>Major:</strong> Computer Science</p>
+        <p><strong>Expected Graduation:</strong> May 2024</p>
+        <p><strong>GPA:</strong> 3.8</p>
+      </div>
+    </div>
+  </body>
+</html>

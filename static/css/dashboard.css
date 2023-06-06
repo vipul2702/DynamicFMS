@@ -1,0 +1,79 @@
+.card-1 {
+    font-weight: 400;
+    margin-left: 0px;
+    margin-bottom: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    margin-top: 15px;
+    border: none !important;
+    width: 100%;
+}
+#pro-icon {
+    margin-top: 11px;
+    margin-bottom: 10px;
+    margin-left: 6px;
+}
+#add-icon{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+}
+#pay-icon{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+}
+#fee-icon{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+}
+.img-icon{
+    color: white !important;
+}
+#p-icon{
+    font-size: 2em;
+    color: white;
+}
+#a-icon{
+    font-size: 3em;
+}
+.T-pro{
+    background-color: rgb(160, 212, 40);
+}
+.T-add{
+    background-color: firebrick;
+}
+.T-pay{
+    background-color:sienna;
+}
+.T-fee{
+    background-color:mediumvioletred;
+}
+.card-2{
+    font-weight: 501;
+    margin-left: 0px;
+    margin-bottom: -10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    margin-top: 15px !important;
+    border: none !important;
+}
+.card-3{
+    font-weight: 501;
+    margin-left: 0px;
+    margin-bottom: -10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    margin-top: 20px !important;
+    border: none !important;
+}
+.card-4{
+    font-weight: 501;
+    margin-left: 0px;
+    margin-bottom: -10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    margin-top: 20px !important;
+    border: none !important;
+}
