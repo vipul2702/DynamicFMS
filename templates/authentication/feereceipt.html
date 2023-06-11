@@ -1,65 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Payment Receipt</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-      }
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/feereceipt.css' %}" />
 
-      .container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        background-color: #f7f7f7;
-      }
+{% block content %}
 
-      .container h2 {
-        text-align: center;
-      }
-
-      .receipt-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-      }
-
-      .receipt-table th,
-      .receipt-table td {
-        padding: 10px;
-        border: 1px solid #ccc;
-      }
-
-      .receipt-table th {
-        text-align: left;
-        font-weight: bold;
-        background-color: #f2f2f2;
-      }
-
-      .receipt-table td.remarks {
-        vertical-align: top;
-      }
-
-      .print-button {
-        text-align: center;
-      }
-
-      .print-button button {
-        padding: 10px 20px;
-        background-color: #4caf50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      .print-button button:hover {
-        background-color: #45a049;
-      }
-    </style>
-  </head>
-  <body>
     <div class="container">
       <h2>Payment Receipt</h2>
       <table class="receipt-table">
@@ -92,5 +36,4 @@
         <button onclick="window.print()">Print Receipt</button>
       </div>
     </div>
-  </body>
-</html>
+    {% endblock content %}

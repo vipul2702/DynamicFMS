@@ -1,35 +1,14 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>School Fees Payment System</title>
-
-    <!-- BOOTSTRAP STYLES-->
-    <link href="{% static 'css1/bootstrap.css' %}" rel="stylesheet" />
-    <!-- FONTAWESOME STYLES-->
-    <link href="{% static 'css1/font-awesome.css' %}" rel="stylesheet" />
-       <!--CUSTOM BASIC STYLES-->
-    <link href="{% static 'css1/basic.css' %}" rel="stylesheet" />
-    <!--CUSTOM MAIN STYLES-->
-    <link href="{% static 'css1/custom.css' %}" rel="stylesheet" />
-    <!-- GOOGLE FONTS-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-	
-	<link href="{% static 'css1/ui.css' %}" rel="stylesheet" />
-	<link href="{% static 'css1/datepicker.css' %}" rel="stylesheet" />	
-	
-    <script src="js/jquery-1.10.2.js"></script>
-	
-    <script type='text/javascript' src='js/jquery/jquery-ui-1.10.1.custom.min.js'></script>
-   
-    <style>body {
-      font-family: "Roboto", Arial, sans-serif;
+{% block css %}
+<title>Enrollment/Application Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
       background-color: #f7f7f7;
-      padding: 20px;
     }
-  
+
     .container {
       max-width: 800px;
       margin: 0 auto;
@@ -37,294 +16,111 @@
       background-color: #ffffff;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
-  
+
     .container h2 {
       text-align: center;
       margin-bottom: 30px;
       color: #333333;
     }
-  
-    .form-group {
-      margin-bottom: 30px;
-    }
-  
+
     .form-group label {
-      display: block;
-      margin-bottom: 10px;
       font-weight: bold;
       color: #333333;
     }
-  
-    .form-group input[type="text"],
-    .form-group input[type="email"],
-    .form-group input[type="tel"],
-    .form-group input[type="date"],
-    .form-group input[type="file"],
-    .form-group textarea {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border: 1px solid #e0e0e0;
-      border-radius: 4px;
-      background-color: #f9f9f9;
-      color: #333333;
-      transition: border-color 0.3s ease;
+
+    .form-group .custom-file-label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-  
-    .form-group input[type="text"]:focus,
-    .form-group input[type="email"]:focus,
-    .form-group input[type="tel"]:focus,
-    .form-group input[type="date"]:focus,
-    .form-group textarea:focus {
-      border-color: #4caf50;
-      outline: none;
-    }
-  
-    .form-group .upload-button {
-      margin-top: 10px;
-    }
-  
-    .form-group .upload-button input[type="file"] {
-      display: none;
-    }
-  
-    .form-group .gender-options {
-      display: flex;
-    }
-  
-    .form-group .gender-options label {
-      margin-right: 10px;
-    }
-  
-    .form-group .gender-options input[type="radio"] {
-      margin-right: 5px;
-    }
-  
-    .form-group .upload-button label {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #4caf50;
-      color: white;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-  
-    .form-group .upload-button label:hover {
-      background-color: #45a049;
-    }
-  
-    .form-group .upload-button span {
-      margin-left: 10px;
-    }
-  
+
     .form-group .button-container {
       text-align: center;
     }
-  
-    .form-group .button-container button {
-      padding: 12px 24px;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-  
-    .form-group .button-container button:hover {
-      background-color: #45a049;
-    }</style>
-	
-</head>
-        <div id="page-wrapper">
-            <div id="page-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="page-head-line">Students 
-                        <a href="{% url 'dashboard' %}" class="btn btn-primary btn-sm pull-right">Back</a>
-						</h1>
-                    </div>
-                </div>	
-				
-				
-       <script type="text/javascript" src="js/validation/jquery.validate.min.js"></script>
-                <div class="row">
-				
-                    <div class="col-sm-10 col-sm-offset-1">
-               <div class="panel panel-primary">
-                        <div class="panel-heading">
-                          <h4>Admission Form</h4>
-                        </div>
-						<form action="student.php" method="post" id="signupForm1" class="form-horizontal">
-                        <div class="panel-body">
-						<fieldset class="scheduler-border" > 
-						 <legend  class="scheduler-border">Personal Information:</legend>
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Full Name* </label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="sname" name="sname" value=""  />
-								</div>
-						</div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label" for="gender">Gender*</label>
-              <div lass="col-sm-10">
-                <label class="col-sm-2 control-label"><input type="radio" name="gender" value="male" required />Male</label>
-                <label class="col-sm-2 control-label"><input type="radio" name="gender" value="female" required />Female</label>
-                <label class="col-sm-2 control-label"><input type="radio" name="gender" value="other" required />Other</label>
-              </div>
-            </div>
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Contact* </label>
-								<div class="col-sm-10">
-									<input type="number" class="form-control" id="contact" name="contact" value="" maxlength="10" />
-								</div>
-							</div>
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Aadhar Number* </label>
-								<div class="col-sm-10">
-									<input type="number" class="form-control" id="contact" name="contact" value="" maxlength="10" />
-								</div>
-							</div>
-							
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Branch* </label>
-								<div class="col-sm-10">
-									<select  class="form-control" id="branch" name="branch" >
-									<option value="" >Select Branch</option>
-                  <option value="">...</option>';
-									</select>
-								</div>
-						</div>
-						
-						
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">DOB* </label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="joindate" name="joindate" value="" style="background-color: #fff;" readonly />
-								</div>
-							</div>
-						 </fieldset>
-						
-						
-							<fieldset class="scheduler-border" >
-						 <legend  class="scheduler-border">Educational Information:</legend>
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">10<sup>th</sup> Marks* </label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="fees" name="fees" value="" placeholder="Enter your High School Marks(in percentage)" />
-								</div>
-						</div>
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">12<sup>th</sup> Marks* </label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="advancefees" name="advancefees" placeholder="Enter your Inter Mediate Marks(in percentage)" />
-								</div>
-						</div>
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Graduation Marks* </label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control"  id="balance" name="balance" value="" placeholder="Enter your Graduation Marks(in percentage)" />
-								</div>
-						</div>
-            <div class="form-group">
-								<label class="col-sm-2 control-label" for="Password">Fee Remark </label>
-								<div class="col-sm-10">
-	                        <textarea class="form-control" id="remark" name="remark"></textarea >
-								</div>
-							</div>
-						</fieldset>
-							<fieldset class="scheduler-border" >
-						 <legend  class="scheduler-border">Upload Documents:</legend>
-             <div class="form-group">
-              <label for="document-upload">10<sup>th</sup> Marks* </label>
-              <div class="upload-button">
-                <input
-                  type="file"
-                  id="document-upload"
-                  name="document-upload"
-                  accept="image/*"
-                  required
-                  multiple
-                />
-                <label for="document-upload"><span>Choose Files</span></label>
-              </div>
-								<label class="col-sm-2 control-label" for="Old">Total Fees* </label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="fees" name="fees" value=""" />
-								</div>
-						</div>
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Advance Fee* </label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="advancefees" name="advancefees" readonly   />
-								</div>
-						</div>
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Balance </label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control"  id="balance" name="balance" value="" disabled />
-								</div>
-						</div>
-            <div class="form-group">
-								<label class="col-sm-2 control-label" for="Password">Fee Remark </label>
-								<div class="col-sm-10">
-	                        <textarea class="form-control" id="remark" name="remark"></textarea >
-								</div>
-							</div>
-						</fieldset>
-							
-							 <fieldset class="scheduler-border" >
-						 <legend  class="scheduler-border">Optional Information:</legend>
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="Password">About Student </label>
-								<div class="col-sm-10">
-	                        <textarea class="form-control" id="about" name="about"></textarea >
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Email Id </label>
-								<div class="col-sm-10">
-									
-									<input type="text" class="form-control" id="emailid" name="emailid" value=""  />
-								</div>
-						    </div>
-							</fieldset>
-						
-						<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-2">
-								<input type="hidden" name="id" value="">
-								<input type="hidden" name="action" value="">
-								
-									<button type="submit" name="save" class="btn btn-primary">Save </button>
-								 
-								   
-								   
-								</div>
-							</div>
-                         
-                           
-                           
-                         
-                           
-                         </div>
-							</form>
-							
-                        </div>
-                            </div>
-            
-			
-                </div>
-		</div>
-            <!-- /. PAGE INNER  -->
-        </div>
-        <!-- /. PAGE WRAPPER  -->
-    </div>
-    <!-- /. WRAPPER  -->
+  </style>
+{% endblock css %}
+{% block content %}
 
-    <div id="footer-sec">
-	Fees Management System
-    </div>
   
+</head>
+<body>
+  <div class="container py-4">
+    <h2 class="text-center mb-4">Enrollment/Application Form</h2>
+    <form action="#" method="post">
+      <div class="form-group">
+        <label for="enrollment-number">Enrollment/Application Number:</label>
+        <input type="text" id="enrollment-number" name="enrollment-number" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="full-name">Full Name:</label>
+        <input type="text" id="full-name" name="full-name" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="adhar-number">Aadhaar Card Number:</label>
+        <input type="text" id="adhar-number" name="adhar-number" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="adhar-upload">Upload Aadhaar Card:</label>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="adhar-upload" name="adhar-upload" required>
+          <label class="custom-file-label" for="adhar-upload">Choose File</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="10th-marks">10th Grade Marks:</label>
+        <input type="text" id="10th-marks" name="10th-marks" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="12th-marks">12th Grade Marks:</label>
+        <input type="text" id="12th-marks" name="12th-marks" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="graduation-marks">Graduation Marks:</label>
+        <input type="text" id="graduation-marks" name="graduation-marks" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="4" class="form-control" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="optional-info">Optional Information:</label>
+        <textarea id="optional-info" name="optional-info" rows="4" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="document-upload">Upload Related Documents:</label>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="document-upload" name="document-upload" required multiple>
+          <label class="custom-file-label" for="document-upload">Choose Files</label>
+        </div>
+      </div>
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+{% endblock content %}
+
+    
+    
+    
+
+
+        

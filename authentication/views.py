@@ -61,7 +61,7 @@ def signup(request):
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
         myuser.last_name = lname
-        myuser.is_active = True
+        myuser.is_active = False
 
         myuser.save()
 
@@ -123,9 +123,8 @@ def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['pass1']
-
         user = authenticate(username=username, password=pass1)
-
+        
         if user is not None:
             login(request, user)
             fname = user.first_name
@@ -139,11 +138,17 @@ def signin(request):
 
 # @login_required
 def dashboard(request):
+    myuser = request.user;
+    
+    
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['pass1']
         
         user = authenticate(username=username, password=pass1)
+        
+        
+            
 
         if user is not None:
             login(request, user)
@@ -153,8 +158,13 @@ def dashboard(request):
             email = user.email
             print(email)
             print("i love you jaan")
+            
             return render(request, "authentication/dashboard.html", {'fname': fname, 'lname':lname})
         else:
+            # verifyLogin = myuser.is_active
+            # if not verifyLogin: 
+            #     # user = User.objects.get(myuser=username)
+            #     return render(request, "authentication/student_wait_approval.html")
             messages.error(request, "Invalid User!")
             return redirect('home')
 
@@ -198,3 +208,7 @@ def helo(request):
 
 def setting(request):
     return render(request, "authentication/setting.html")
+
+
+def student_wait(request):
+    return render(request, 'authentication/student_wait_approval.html')

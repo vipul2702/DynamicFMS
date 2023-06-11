@@ -12,6 +12,7 @@ urlpatterns = [
     path('payment', views.payment, name="payment"),
     path('profile', views.profile, name="profile"),
     path('helo', views.helo, name="helo"),
+    path('student_wait', views.student_wait, name=""),
     path('setting', views.setting, name="setting"),
     path('feereceipt', views.feereceipt, name="feereceipt"),
     path('signin', views.signin, name="signin"),

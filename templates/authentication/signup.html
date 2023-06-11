@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% include "utility/header.html" %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,19 +25,11 @@ body{
         background-size: 100vw 100vh;
         background-repeat: no-repeat;
       }
-
-      #main-header{
-    background-color: black;
-    color: white;
-    padding: 20px;
-    /* padding-left: 30px; */
-}
-    </style>
+   </style>
   </head>
   <body>
     <div class="bg-dark text-white">
-      <div class="container"> <h5 id="main-header"> Fees Management System</h5></div>
-    </div> <br> <br> <br> <br> <br> 
+    </div> <br> <br> 
     <div class="container" style="margin-left: 30%;">
       <div class="jumbotron">
         <div class="card p-4" style="width: 40rem;">
@@ -154,7 +146,9 @@ body{
           </div>
           <br>
             <button type="submit" class="btn btn-warning form-control">Sign Up</button>
-          
+          <br>
+          <br>
+            <div class="text-center">Already have an account? <a href="{% url 'signin' %}" style="text-decoration: none;">Sign In here</a></div>
           </form>
         </div>
     </div>

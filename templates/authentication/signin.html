@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% include "utility/header.html" %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,26 +28,12 @@
         margin: 0;
       }
 
-      #main-header {
-        background-color: black;
-        color: white;
-        padding: 20px;
-        /* padding-left: 30px; */
-      }
       /* #bg {
         background-image: url("{static'images/2.png'}");
       } */
     </style>
   </head>
   <body>
-    <div class="bg-dark text-white">
-      <div class="container">
-        <h5 id="main-header">Fee Management System</h5>
-      </div>
-    </div>
-    <br />
-    <br />
-    <br />
     <br />
     <br />
     <br />
@@ -112,6 +98,13 @@
           </button>
           <br />
           <br />
+          <div class="text">
+            Don't have an account?
+            <a style="text-decoration: none" href="{% url 'signup' %}"
+              >SignUp here</a
+            >
+          </div>
+          <br />
           <div class="form-check form-switch">
             <input
               class="form-check-input"
@@ -123,7 +116,10 @@
             <label class="form-check-label" for="flexSwitchCheckChecked"
               >Remember me</label
             >
-            <a class="float-end" href="/forgetpassword.html"
+            <a
+              style="text-decoration: none"
+              class="float-end"
+              href="/forgetpassword.html"
               >Forgot your password?</a
             >
           </div>
