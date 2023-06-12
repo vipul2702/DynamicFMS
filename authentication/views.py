@@ -13,6 +13,30 @@ from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth import authenticate, login, logout
 from . tokens import generate_token
 from django.contrib.auth.decorators import login_required
+from rest_framework.response import Response
+from authentication.models import StudentAdmission
+from authentication.serializers import StudentAdmissionSerializer
+from rest_framework.views import APIView
+from rest_framework import status
+from .forms import StudentAdmission
+
+def showformdata(request):
+    fm = StudentAdmission()
+    return render(request, 'authentication/usersdata.html', {'form':fm})
+
+class StudentAdmissionView(APIView):
+    def post(self, request, format=None):
+        serializer = StudentAdmissionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg':'Admission Form Upload Successfully', 'status': 'success',
+                             'candidate': serializer.data}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors)
+
+    def get(self, request, format=None):
+        candidates = StudentAdmission.objects.all()
+        serializer = StudentAdmissionSerializer(candidates, many=True)
+        return Response({'status':'success', 'candidates':serializer.data}, status=status.Http_200_OK)
 
 
 # Create your views here.
@@ -156,8 +180,8 @@ def dashboard(request):
             lname = user.last_name
             global email 
             email = user.email
-            print(email)
-            print("i love you jaan")
+            # print(email)
+            # print("i love you jaan")
             
             return render(request, "authentication/dashboard.html", {'fname': fname, 'lname':lname})
         else:
@@ -212,3 +236,4 @@ def setting(request):
 
 def student_wait(request):
     return render(request, 'authentication/student_wait_approval.html')
+

@@ -45,64 +45,84 @@
 </head>
 <body>
   <div class="container py-4">
-    <h2 class="text-center mb-4">Enrollment/Application Form</h2>
+    <h2 class="text-center mb-4">ADMISSION FORM</h2> <hr>
     <form action="#" method="post">
       <div class="form-group">
         <label for="enrollment-number">Enrollment/Application Number:</label>
-        <input type="text" id="enrollment-number" name="enrollment-number" class="form-control" required>
+        <input type="text" id="enrollment-number" name="enumber" class="form-control" placeholder="Enter your application number" required>
       </div>
       <div class="form-group">
         <label for="full-name">Full Name:</label>
-        <input type="text" id="full-name" name="full-name" class="form-control" required>
+        <input type="text" id="full-name" name="fullname" class="form-control" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+		<label for="gender">Gender:</label>
+		<div style="display: inline; padding: 20px;">
+		  <input type="radio" id="male" name="gender" value="male">
+		  <label for="male">Male</label>
+		</div>
+		<div style="display: inline; padding: 20px;">
+		  <input type="radio" id="female" name="gender" value="female">
+		  <label for="female">Female</label>
+		</div>
+		<div style="display: inline; padding: 20px;">
+		  <input type="radio" id="other" name="gender" value="other">
+		  <label for="other">Other</label>
+		</div>
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" class="form-control" required>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
       </div>
       <div class="form-group">
         <label for="dob">Date of Birth:</label>
         <input type="date" id="dob" name="dob" class="form-control" required>
       </div>
       <div class="form-group">
-        <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" name="phone" class="form-control" required>
+        <label for="phone">Mobile Number:</label>
+        <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your mobile number" required>
       </div>
       <div class="form-group">
         <label for="adhar-number">Aadhaar Card Number:</label>
-        <input type="text" id="adhar-number" name="adhar-number" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="adhar-upload">Upload Aadhaar Card:</label>
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" id="adhar-upload" name="adhar-upload" required>
-          <label class="custom-file-label" for="adhar-upload">Choose File</label>
-        </div>
+        <input type="text" id="adhar-number" name="adhaarnumber" class="form-control" placeholder="Enter your adhaar number" required>
+	  </div>
+	  <div class="form-group">
+        <label for="address">Complete Address:</label>
+        <textarea id="address" name="address" rows="4" class="form-control" placeholder="Enter your address here..." required></textarea>
       </div>
       <div class="form-group">
         <label for="10th-marks">10th Grade Marks:</label>
-        <input type="text" id="10th-marks" name="10th-marks" class="form-control" required>
+        <input type="number" id="10th-marks" name="highmarks" class="form-control" placeholder="in percentage" value="00.00" required>
       </div>
       <div class="form-group">
         <label for="12th-marks">12th Grade Marks:</label>
-        <input type="text" id="12th-marks" name="12th-marks" class="form-control" required>
+        <input type="number" id="12th-marks" name="intermarks" class="form-control" placeholder="in percentage" value="00.00" required>
       </div>
       <div class="form-group">
         <label for="graduation-marks">Graduation Marks:</label>
-        <input type="text" id="graduation-marks" name="graduation-marks" class="form-control" required>
+        <input type="number" id="graduation-marks" name="graduationmarks" class="form-control" placeholder="in percentage" value="00.00" required>
       </div>
       <div class="form-group">
-        <label for="address">Address:</label>
-        <textarea id="address" name="address" rows="4" class="form-control" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="optional-info">Optional Information:</label>
-        <textarea id="optional-info" name="optional-info" rows="4" class="form-control"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="document-upload">Upload Related Documents:</label>
+        <label for="document-upload">Upload Related Documents*:</label>
         <div class="custom-file">
-          <input type="file" class="custom-file-input" id="document-upload" name="document-upload" required multiple>
-          <label class="custom-file-label" for="document-upload">Choose Files</label>
+          <input type="image" class="custom-file-input" id="document-upload" name="profileimage" required multiple>
+          <label class="custom-file-label" for="document-upload">Upload Profile Picture (passport size, jpeg)</label>
+        </div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="document-upload" name="adhaarpdf" required multiple>
+          <label class="custom-file-label" for="document-upload">Upload Adhaar Card (PDF form)</label>
+        </div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="document-upload" name="highschoolpdf" required multiple>
+          <label class="custom-file-label" for="document-upload">Upload 10th Marksheet (PDF form)</label>
+        </div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="document-upload" name="interpdf" required multiple>
+          <label class="custom-file-label" for="document-upload">Upload 12th Marksheet (PDF form)</label>
+        </div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="document-upload" name="graduationpdf" required multiple>
+          <label class="custom-file-label" for="document-upload">Upload Graduation Marksheet (Combined,PDF form)</label>
         </div>
       </div>
       <div class="form-group text-center">

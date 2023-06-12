@@ -1,66 +1,66 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Student Profile</title>
-    <style>
-      body {
-        font-family: "Arial", sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
+{% block css %}
+<style>
+  body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
 
-      .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #fff;
-      }
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
 
-      .profile-picture {
-        max-width: 200px;
-        border-radius: 50%;
-        margin-bottom: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      }
+  .profile-picture {
+    max-width: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
 
-      .section-heading {
-        margin: 0;
-        color: #333;
-      }
+  .section-heading {
+    margin: 0;
+    color: #333;
+  }
 
-      .section-content {
-        margin-bottom: 20px;
-      }
+  .section-content {
+    margin-bottom: 20px;
+  }
 
-      .section-content p {
-        margin: 5px 0;
-        color: #666;
-      }
+  .section-content p {
+    margin: 5px 0;
+    color: #666;
+  }
 
-      .section-content table {
-        width: 100%;
-        margin-bottom: 10px;
-        border-collapse: collapse;
-      }
+  .section-content table {
+    width: 100%;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+  }
 
-      .section-content th,
-      .section-content td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ccc;
-      }
+  .section-content th,
+  .section-content td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
 
-      .section-content th {
-        background-color: #f4f4f4;
-        color: #333;
-      }
-    </style>
-  </head>
-  <body>
+  .section-content th {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+</style>
+{% endblock css %}
+{% block content %}
+
+
     <div class="container">
       <img
         class="profile-picture"
@@ -114,5 +114,4 @@
         <p><strong>GPA:</strong> 3.8</p>
       </div>
     </div>
-  </body>
-</html>
+{% endblock content %}
