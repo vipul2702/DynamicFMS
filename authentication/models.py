@@ -13,11 +13,26 @@ class StudentAdmission(models.Model):
     highmarks = models.IntegerField()
     intermarks = models.IntegerField()
     graduationmarks = models.IntegerField()
-    profileimage = models.ImageField(upload_to='Upload/Profiles', blank=True)
-    adhaarpdf = models.FileField(upload_to='Upload/PDF', blank=True)
-    highschoolpdf = models.FileField(upload_to='Upload/PDF', blank=True)
-    interpdf = models.FileField(upload_to='Upload/PDF', blank=True)
-    graduationpdf = models.FileField(upload_to='Upload/PDF', blank=True)
+    profileimage = models.ImageField(upload_to='Profiles', blank=True)
+    adhaarpdf = models.FileField(upload_to='PDF', blank=True)
+    highschoolpdf = models.FileField(upload_to='PDF', blank=True)
+    interpdf = models.FileField(upload_to='PDF', blank=True)
+    graduationpdf = models.FileField(upload_to='PDF', blank=True)
 
-    def __str__(self):
-        return str(self.enumber)
+    # def __str__(self):
+    #     return str(self.enumber)
+class Course(models.Model):
+    coursename=models.CharField(max_length=100)
+    courseduration=models.CharField(max_length=100)
+    coursedescription=models.TextField()
+
+class Fee(models.Model):
+    feetype=models.CharField(max_length=100)
+    totalfee=models.IntegerField()
+    feedescription=models.TextField()
+    
+class Profile(models.Model):
+    name = models.CharField(max_length=255)
+    photo = models.ImageField(upload_to='profile_photos')
+    age = models.PositiveIntegerField()
+    mobile_number = models.CharField(max_length=20)

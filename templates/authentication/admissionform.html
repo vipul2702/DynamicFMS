@@ -46,17 +46,19 @@
 <body>
   <div class="container py-4">
     <h2 class="text-center mb-4">ADMISSION FORM</h2> <hr>
-    <form action="#" method="post">
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
       <div class="form-group">
-        <label for="enrollment-number">Enrollment/Application Number:</label>
-        <input type="text" id="enrollment-number" name="enumber" class="form-control" placeholder="Enter your application number" required>
+        <label for="{{ form.enumber.id_for_label }}">Enrollment/Application Number:</label>
+        <input type="text" id="{{ form.enumber.id_for_label }}" name="{{ form.enumber.html_name }}" class="form-control" placeholder="Enter your application number" required>
       </div>
       <div class="form-group">
-        <label for="full-name">Full Name:</label>
-        <input type="text" id="full-name" name="fullname" class="form-control" placeholder="Enter your full name" required>
+        <label for="{{ form.fullname.id_for_label }}">Full Name:</label>
+        <input type="text" id="{{ form.fullname.id_for_label }}" name="{{ form.fullname.html_name }}" class="form-control" placeholder="Enter your full name" required>
       </div>
       <div class="form-group">
-		<label for="gender">Gender:</label>
+		<label for="{{ form.gender.id_for_label }}">Gender:</label>
 		<div style="display: inline; padding: 20px;">
 		  <input type="radio" id="male" name="gender" value="male">
 		  <label for="male">Male</label>
@@ -70,59 +72,60 @@
 		  <label for="other">Other</label>
 		</div>
       </div>
+
       <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+        <label for="{{ form.email.id_for_label }}">Email:</label>
+        <input type="email" id="{{ form.email.id_for_label }}" name="{{ form.email.html_name }}" class="form-control" placeholder="Enter your email" required>
       </div>
       <div class="form-group">
-        <label for="dob">Date of Birth:</label>
-        <input type="date" id="dob" name="dob" class="form-control" required>
+        <label for="{{ form.dob.id_for_label }}">Date of Birth:</label>
+        <input type="date" id="{{ form.dob.id_for_label }}" name="{{ form.dob.html_name }}" class="form-control" required>
       </div>
       <div class="form-group">
-        <label for="phone">Mobile Number:</label>
-        <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your mobile number" required>
+        <label for="{{ form.phone.id_for_label }}">Mobile Number:</label>
+        <input type="tel" id="{{ form.phone.id_for_label }}" name="{{ form.phone.html_name }}" class="form-control" placeholder="Enter your mobile number" required>
       </div>
       <div class="form-group">
-        <label for="adhar-number">Aadhaar Card Number:</label>
-        <input type="text" id="adhar-number" name="adhaarnumber" class="form-control" placeholder="Enter your adhaar number" required>
+        <label for="{{ form.adhaarnumber.id_for_label }}">Aadhaar Card Number:</label>
+        <input type="text" id="{{ form.adhaarnumber.id_for_label }}" name="{{ form.adhaarnumber.html_name }}" class="form-control" placeholder="Enter your adhaar number" required>
 	  </div>
 	  <div class="form-group">
-        <label for="address">Complete Address:</label>
-        <textarea id="address" name="address" rows="4" class="form-control" placeholder="Enter your address here..." required></textarea>
+        <label for="{{ form.address.id_for_label }}">Complete Address:</label>
+        <textarea id="{{ form.address.id_for_label }}" name="{{ form.address.html_name }}" rows="4" class="form-control" placeholder="Enter your address here..." required></textarea>
       </div>
       <div class="form-group">
-        <label for="10th-marks">10th Grade Marks:</label>
-        <input type="number" id="10th-marks" name="highmarks" class="form-control" placeholder="in percentage" value="00.00" required>
+        <label for="{{ form.highmarks.id_for_label }}">10th Grade Marks:</label>
+        <input type="number" id="{{ form.highmarks.id_for_label }}" name="{{ form.highmarks.html_name }}" class="form-control" placeholder="in percentage" value="00.00" required>
       </div>
       <div class="form-group">
-        <label for="12th-marks">12th Grade Marks:</label>
-        <input type="number" id="12th-marks" name="intermarks" class="form-control" placeholder="in percentage" value="00.00" required>
+        <label for="{{ form.intermarks.id_for_label }}">12th Grade Marks:</label>
+        <input type="number" id="{{ form.intermarks.id_for_label }}" name="{{ form.intermarks.html_name }}" class="form-control" placeholder="in percentage" value="00.00" required>
       </div>
       <div class="form-group">
-        <label for="graduation-marks">Graduation Marks:</label>
-        <input type="number" id="graduation-marks" name="graduationmarks" class="form-control" placeholder="in percentage" value="00.00" required>
+        <label for="{{ form.graduationmarks.id_for_label }}">Graduation Marks:</label>
+        <input type="number" id="{{ form.graduationmarks.id_for_label }}" name="{{ form.graduationmarks.html_name }}" class="form-control" placeholder="in percentage" value="00.00" required>
       </div>
       <div class="form-group">
-        <label for="document-upload">Upload Related Documents*:</label>
+        <label for="upload">Upload Related Documents*:</label>
         <div class="custom-file">
-          <input type="image" class="custom-file-input" id="document-upload" name="profileimage" required multiple>
-          <label class="custom-file-label" for="document-upload">Upload Profile Picture (passport size, jpeg)</label>
+          <input type="file" class="custom-file-input" id="{{ form.profileimage.id_for_label }}" name="{{ form.profileimage.html_name }}" required multiple>
+          <label class="custom-file-label" for="{{ form.profileimage.id_for_label }}">Upload Profile Picture (passport size, jpeg)</label>
         </div>
         <div class="custom-file">
-          <input type="file" class="custom-file-input" id="document-upload" name="adhaarpdf" required multiple>
-          <label class="custom-file-label" for="document-upload">Upload Adhaar Card (PDF form)</label>
+          <input type="file" class="custom-file-input" id="{{ form.adhaarpdf.id_for_label }}" name="{{ form.adhaarpdf.html_name }}" required multiple>
+          <label class="custom-file-label" for="{{ form.adhaarpdf.id_for_label }}">Upload Adhaar Card (PDF form)</label>
         </div>
         <div class="custom-file">
-          <input type="file" class="custom-file-input" id="document-upload" name="highschoolpdf" required multiple>
-          <label class="custom-file-label" for="document-upload">Upload 10th Marksheet (PDF form)</label>
+          <input type="file" class="custom-file-input" id="{{ form.highschoolpdf.id_for_label }}" name="{{ form.highschoolpdf.html_name }}" required multiple>
+          <label class="custom-file-label" for="{{ form.highschoolpdf.id_for_label }}">Upload 10th Marksheet (PDF form)</label>
         </div>
         <div class="custom-file">
-          <input type="file" class="custom-file-input" id="document-upload" name="interpdf" required multiple>
-          <label class="custom-file-label" for="document-upload">Upload 12th Marksheet (PDF form)</label>
+          <input type="file" class="custom-file-input" id="{{ form.interpdf.id_for_label }}" name="{{ form.interpdf.html_name }}" required multiple>
+          <label class="custom-file-label" for="{{ form.interpdf.id_for_label }}">Upload 12th Marksheet (PDF form)</label>
         </div>
         <div class="custom-file">
-          <input type="file" class="custom-file-input" id="document-upload" name="graduationpdf" required multiple>
-          <label class="custom-file-label" for="document-upload">Upload Graduation Marksheet (Combined,PDF form)</label>
+          <input type="file" class="custom-file-input" id="{{ form.graduationpdf.id_for_label }}" name="{{ form.graduationpdf.html_name }}" required multiple>
+          <label class="custom-file-label" for="{{ form.graduationpdf.id_for_label }}">Upload Graduation Marksheet (Combined,PDF form)</label>
         </div>
       </div>
       <div class="form-group text-center">

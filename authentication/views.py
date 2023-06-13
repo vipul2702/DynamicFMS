@@ -18,11 +18,28 @@ from authentication.models import StudentAdmission
 from authentication.serializers import StudentAdmissionSerializer
 from rest_framework.views import APIView
 from rest_framework import status
-from .forms import StudentAdmission
+from .forms import StudentAdmissionForm
+from .forms import ProfileForm
+
+# def create_profile(request):
+#     if request.method == 'POST':
+#         form = ProfileForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponse('profile_created')  # Redirect to a success page
+#     else:
+#         form = ProfileForm()
+#     return render(request, 'authentication/usersdata.html', {'form': form})
 
 def showformdata(request):
-    fm = StudentAdmission()
-    return render(request, 'authentication/usersdata.html', {'form':fm})
+    if request.method == 'POST':
+        fm = StudentAdmissionForm(request.POST, request.FILES)
+        if fm.is_valid() :
+            fm.save()
+            return HttpResponse("Form Created")
+    else:
+        fm = StudentAdmissionForm()
+    return render(request, 'authentication/admissionform.html', {'form':fm})
 
 class StudentAdmissionView(APIView):
     def post(self, request, format=None):
@@ -237,3 +254,8 @@ def setting(request):
 def student_wait(request):
     return render(request, 'authentication/student_wait_approval.html')
 
+def about(request):
+    return render(request, 'authentication/about.html')
+
+def contact(request):
+    return render(request, 'authentication/contact.html')

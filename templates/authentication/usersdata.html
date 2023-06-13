@@ -8,15 +8,23 @@
 <body>
     <!-- <form action="get">
         {{form}}
-    </form>
-    <form action="get">
-        {{form.as_table}}
     </form> -->
-    <form action="get">
-        {{form.as_p}}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+
+            {{ form.as_table }}
+        </table>
+        <button type="submit">Save</button>
     </form>
+    
+    <!-- <form action="get">
+        {{form.as_p}}
+    </form> -->
     <!-- <form action="get">
         {{form.as_ul}}
     </form>
-</body> -->
+ -->
+</body>
 </html>
