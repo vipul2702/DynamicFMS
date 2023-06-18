@@ -13,47 +13,59 @@ from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth import authenticate, login, logout
 from . tokens import generate_token
 from django.contrib.auth.decorators import login_required
-from rest_framework.response import Response
+# from rest_framework.response import Response
 from authentication.models import StudentAdmission
-from authentication.serializers import StudentAdmissionSerializer
-from rest_framework.views import APIView
-from rest_framework import status
+# from authentication.serializers import StudentAdmissionSerializer
+# from rest_framework.views import APIView
+# from rest_framework import status
 from .forms import StudentAdmissionForm
 from .forms import ProfileForm
 
-# def create_profile(request):
-#     if request.method == 'POST':
-#         form = ProfileForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponse('profile_created')  # Redirect to a success page
-#     else:
-#         form = ProfileForm()
-#     return render(request, 'authentication/usersdata.html', {'form': form})
-
-def showformdata(request):
+def create_profile(request):
     if request.method == 'POST':
+        
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('profile_created')  # Redirect to a success page
+    else:
+        form = ProfileForm()
+    return render(request, 'authentication/usersdata.html', {'form': form})
+
+@login_required(login_url='/signin')
+def showformdata(request):
+    email = request.user.email
+    fname = request.user.first_name +" "+ request.user.last_name
+    admission_form = 'authentication/admissionform.html'
+    data = StudentAdmission.objects.all()
+    for i in data:
+        if(i.email == request.user.email):
+            admission_form = 'authentication/student_wait_approval.html'
+            break
+    if request.method == 'POST':
+        
+        
         fm = StudentAdmissionForm(request.POST, request.FILES)
         if fm.is_valid() :
             fm.save()
-            return HttpResponse("Form Created")
+            return render(request,"authentication/student_wait_approval.html")
     else:
         fm = StudentAdmissionForm()
-    return render(request, 'authentication/admissionform.html', {'form':fm})
+    return render(request, admission_form, {'form':fm, 'email':email, 'fname':fname})
 
-class StudentAdmissionView(APIView):
-    def post(self, request, format=None):
-        serializer = StudentAdmissionSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'msg':'Admission Form Upload Successfully', 'status': 'success',
-                             'candidate': serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors)
+# class StudentAdmissionView(APIView):
+#     def post(self, request, format=None):
+#         serializer = StudentAdmissionSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response({'msg':'Admission Form Upload Successfully', 'status': 'success',
+#                              'candidate': serializer.data}, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors)
 
-    def get(self, request, format=None):
-        candidates = StudentAdmission.objects.all()
-        serializer = StudentAdmissionSerializer(candidates, many=True)
-        return Response({'status':'success', 'candidates':serializer.data}, status=status.Http_200_OK)
+#     def get(self, request, format=None):
+#         candidates = StudentAdmission.objects.all()
+#         serializer = StudentAdmissionSerializer(candidates, many=True)
+#         return Response({'status':'success', 'candidates':serializer.data}, status=status.Http_200_OK)
 
 
 # Create your views here.
@@ -75,7 +87,7 @@ def signup(request):
         # username = request.POST['username']
         # # fname = request.POST['fname']
         # lname = request.POST['lname']
-        # email = request.POST['email']
+        # email = request.POST['email'] 
         # pass1 = request.POST['pass1']
         # pass2 = request.POST['pass2']
 
@@ -177,20 +189,13 @@ def signin(request):
 
     return render(request, "authentication/signin.html")
 
-# @login_required
+# @login_required(login_url='/signin')
 def dashboard(request):
-    myuser = request.user;
-    
-    
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['pass1']
         
         user = authenticate(username=username, password=pass1)
-        
-        
-            
-
         if user is not None:
             login(request, user)
             fname = user.first_name
@@ -206,13 +211,14 @@ def dashboard(request):
             # if not verifyLogin: 
             #     # user = User.objects.get(myuser=username)
             #     return render(request, "authentication/student_wait_approval.html")
-            messages.error(request, "Invalid User!")
+            messages.success(request, "Your account not verified yet! Wait for some time")
             return redirect('home')
 
     return render(request, "authentication/dashboard.html")
 
 def forgetpassword(request):
     return render(request, 'forgetpassword.html')
+
 
 def admissionform(request):
     if request.method == 'POST':

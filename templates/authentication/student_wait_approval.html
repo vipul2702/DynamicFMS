@@ -34,7 +34,7 @@
     <br />
 
     <div class="jumbotron" style="margin-top: 0px; margin-bottom: 0px">
-      <h1 class="display-4">Hello {{request.user.first_name}} User</h1>
+      <h1 class="display-4">Hello {{request.user.first_name}} {{request.user.last_name}}</h1>
       <p class="text-center" style="text-align: center">
         Your Account has not been approved yet!<br /><br />Our Administrative
         Team will be checking it soon. <br /><br />
@@ -47,7 +47,7 @@
       <hr class="my-4" />
       <p style="text-align: center">Check Later</p>
       <p class="lead" style="text-align: center">
-        <a class="btn btn-danger btn-lg" href="/signin" role="button">Logout</a>
+        <a class="btn btn-danger btn-lg" href="/dashboard" role="button">Dashboard</a>
       </p>
     </div>
     <!-- {% include "utility/main-footer.html" %} -->

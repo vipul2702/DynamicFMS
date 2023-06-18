@@ -8,7 +8,7 @@ from authentication.models import Profile
 # Register StudentAdimission model using decorators
 @admin.register(StudentAdmission)
 class StudentAdmissionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'enumber', 'fullname', 'gender', 'email', 'dob', 'phone', 'adhaarnumber', 'address', 'highmarks',
+    list_display = ['id', 'enumber', 'fullname', 'course', 'gender', 'email', 'dob', 'phone', 'adhaarnumber', 'address', 'highmarks',
                     'intermarks', 'graduationmarks', 'profileimage', 'adhaarpdf', 'highschoolpdf', 'interpdf', 'graduationpdf']
 
 # Register StudentAdimission model using admin.site.register

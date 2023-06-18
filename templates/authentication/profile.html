@@ -68,20 +68,21 @@
         alt="Profile Picture"
       />
       {% if user.is_authenticated %}
-      <h4 class="text-center">Welcome to Dashboard</h4>
-      <h3>Hello {{ fname }}&nbsp;{{ lname }}</h3>
-      <h4>You're successfully logged in.</h4>
+      <!-- <h4 class="text-center">Welcome to Dashboard</h4> -->
+      <!-- <h3>Hello {{ request.user.first_name }}&nbsp;{{ request.user.last_name }}</h3> -->
+      <!-- <h4>You're successfully logged in.</h4> -->
 
       {% endif %}
+      <hr>
       <div class="section-content">
         <h2 class="section-heading">Personal Information</h2>
-        <p><strong>Name:</strong> John Doe</p>
-        <p><strong>Date of Birth:</strong> January 1, 2000</p>
-        <p><strong>Email:</strong> johndoe@example.com</p>
+        <p><strong>Full Name:</strong> {{ request.user.first_name }}&nbsp;{{ request.user.last_name }}</</p>
+        <p><strong>Date of Birth:</strong> {{ request.user.dob }}</p>
+        <p><strong>Email:</strong> {{ request.user.email }}</p>
         <p><strong>Phone:</strong> +1 123 456 7890</p>
         <p><strong>Address:</strong> 123 Main Street, City, State, ZIP</p>
       </div>
-      <div class="section-content">
+      <!-- <div class="section-content">
         <h2 class="section-heading">Family Information</h2>
         <table>
           <tr>
@@ -112,6 +113,6 @@
         <p><strong>Major:</strong> Computer Science</p>
         <p><strong>Expected Graduation:</strong> May 2024</p>
         <p><strong>GPA:</strong> 3.8</p>
-      </div>
+      </div> -->
     </div>
 {% endblock content %}

@@ -4,7 +4,7 @@ from .models import Profile
 class StudentAdmissionForm(forms.ModelForm):
     class Meta:
         model = StudentAdmission
-        fields =  ['enumber', 'fullname', 'gender', 'email', 'dob', 'phone', 'adhaarnumber', 'address', 'highmarks',
+        fields =  ['enumber', 'fullname', 'course', 'gender', 'email', 'dob', 'phone', 'adhaarnumber', 'address', 'highmarks',
                     'intermarks', 'graduationmarks', 'profileimage', 'adhaarpdf', 'highschoolpdf', 'interpdf', 'graduationpdf']
     
 
