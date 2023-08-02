@@ -114,7 +114,7 @@ def signup(request):
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
         myuser.last_name = lname
-        myuser.is_active = False
+        myuser.is_active = True
 
         myuser.save()
 
@@ -211,7 +211,7 @@ def dashboard(request):
             # if not verifyLogin: 
             #     # user = User.objects.get(myuser=username)
             #     return render(request, "authentication/student_wait_approval.html")
-            messages.success(request, "Your account not verified yet! Wait for some time")
+            messages.success(request, "Invalid User !!")
             return redirect('home')
 
     return render(request, "authentication/dashboard.html")
