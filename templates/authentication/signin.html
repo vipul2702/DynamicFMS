@@ -43,14 +43,9 @@
       {% for message in messages %}
       <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
         <strong>Message:</strong> {{ message }}
-        <!-- <button
-        type="button"
-        class="close"
-        data-dismiss="alert"
-        aria-lable="Close"
-      >
-        <span aria-hidden="true"></span>
-      </button> -->
+        <button type="button" class="close" data-dismiss="alert" aria-lable="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
       </div>
       {% endfor %}
 
@@ -60,9 +55,7 @@
         <form action="/dashboard" method="post">
           {% csrf_token %}
           <div class="form-group row">
-            <label for="" class="col-sm-2 col-form-label"
-              ><b> Username </b></label
-            >
+            <label for="" class="col-sm-2 col-form-label"><b> Username </b></label>
             <div class="col-sm-10" style="margin-bottom: 5px">
               <input
                 type="text"
@@ -117,9 +110,9 @@
             <a
               style="text-decoration: none"
               class="float-end"
-              href="/forgetpassword.html"
-              >Forgot your password?</a
-            >
+              href="{% url 'password_reset' %}"
+              >Forgot your password?
+            </a>
           </div>
         </form>
       </div>

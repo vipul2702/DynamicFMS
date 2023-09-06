@@ -1,4 +1,4 @@
-from base64 import urlsafe_b64decode
+# from base64 import urlsafe_b64decode
 from telnetlib import LOGOUT
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -14,10 +14,10 @@ from django.contrib.auth import authenticate, login, logout
 from . tokens import generate_token
 from django.contrib.auth.decorators import login_required
 # from rest_framework.response import Response
-from authentication.models import StudentAdmission
 # from authentication.serializers import StudentAdmissionSerializer
 # from rest_framework.views import APIView
 # from rest_framework import status
+from authentication.models import StudentAdmission
 from .forms import StudentAdmissionForm
 from .forms import ProfileForm
 
@@ -77,19 +77,19 @@ def signup(request):
     if request.method == "POST":
         
         # username = request.POST.get('username')
-        username = request.POST.get('username')
-        fname = request.POST.get('fname')
-        lname = request.POST.get('lname')
-        email = request.POST.get('email')
-        pass1 = request.POST.get('pass1')
-        pass2 = request.POST.get('pass2')
+        # username = request.POST.get('username')
+        # fname = request.POST.get('fname')
+        # lname = request.POST.get('lname')
+        # email = request.POST.get('email')
+        # pass1 = request.POST.get('pass1')
+        # pass2 = request.POST.get('pass2')
 
-        # username = request.POST['username']
-        # # fname = request.POST['fname']
-        # lname = request.POST['lname']
-        # email = request.POST['email'] 
-        # pass1 = request.POST['pass1']
-        # pass2 = request.POST['pass2']
+        username = request.POST['username']
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        email = request.POST['email'] 
+        pass1 = request.POST['pass1']
+        pass2 = request.POST['pass2']
 
         if User.objects.filter(username=username):
                 messages.warning(request, "Username already exist! please try some other username")
@@ -114,38 +114,38 @@ def signup(request):
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
         myuser.last_name = lname
-        myuser.is_active = True
+        myuser.is_active = False
 
         myuser.save()
 
-        messages.success(request, "Your Account has been successfully created.")
+        messages.success(request, "Your Account has been successfully created. Please check your email to confirm your email address in order to activate your account.")
 
         # Welcome Email
 
-        # subject = "Welcome to Our - Dynamic Fee Management System Login!!"
-        # message = "Hello " + myuser.first_name + "!! \n" + "Welcome to DynamicFMS!! \n Thank you for visiting our website \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. \n\n Thanking You\n Vipul Sharma"
-        # from_email = settings.EMAIL_HOST_USER
-        # to_list = [myuser.email]
-        # send_mail(subject, message, from_email, to_list, fail_silently=True)
+        subject = "Welcome to Our - Fee Management System Login!!"
+        message = "Hello " + myuser.first_name + "!! \n" + "Welcome to FMS \n Thank you for visiting our website \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. \n\n Thanking You\n Vipul Sharma"
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [myuser.email]
+        send_mail(subject, message, from_email, to_list, fail_silently=True)
 
-        # # Email Address Confirmation Email
+        # Email Address Confirmation Email
 
-        # curren_site = get_current_site(request)
-        # email_subject = "Confirm your email @ DynamicFMS - Login!!"
-        # message2 = render_to_string('email_confirmation.html',{
-        #     'name': myuser.first_name,
-        #     # 'domain': current_site.domain,
-        #     'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
-        #     'token': generate_token.make_token(myuser)
-        # })
-        # email = EmailMessage(
-        #     email_subject,
-        #     message2,
-        #     settings.EMAIL_HOST_USER,
-        #     [myuser.email],
-        # )
-        # email.fail_silently = True
-        # email.send()
+        current_site = get_current_site(request)
+        email_subject = "Confirm your email @ FMS - Login!!"
+        message2 = render_to_string('email_confirmation.html',{
+            'name': myuser.first_name,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
+            'token': generate_token.make_token(myuser)
+        })
+        email = EmailMessage(
+            email_subject,
+            message2,
+            settings.EMAIL_HOST_USER,
+            [myuser.email],
+        )
+        email.fail_silently = True
+        email.send()
 
         return redirect('signin')
 
@@ -154,7 +154,7 @@ def signup(request):
 
 def activate(request, uidb64, token):
     try:
-        uid = force_str(urlsafe_b64decode)
+        uid = force_str(urlsafe_base64_decode(uidb64))
         myuser = User.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         myuser = None
@@ -163,9 +163,11 @@ def activate(request, uidb64, token):
         myuser.is_active = True
         myuser.save()
         login(request, myuser)
-        return redirect('home')
+        messages.success(request, "Your Account has been activated!!")
+        return redirect('signin')
     else:
         return render(request, 'activation_failed.html')
+    
 def signout(request):
     logout(request)
     messages.success(request, "Logged Out Successfully!")
@@ -254,7 +256,7 @@ def helo(request):
     return render(request, "authentication/helo.html")
 
 def setting(request):
-    return render(request, "authentication/setting.html")
+    return render(request, "authentication/passwordchange.html")
 
 
 def student_wait(request):
