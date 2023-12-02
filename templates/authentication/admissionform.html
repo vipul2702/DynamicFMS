@@ -62,10 +62,18 @@
         <label for="{{ form.course.id_for_label }}">Select Course:</label>
         <select name="{{ form.course.html_name }}" id="{{ form.course.id_for_label }}" required>
           <option selected disabled> Select Course: </option>
-          <option value="MCA"> MCA</option>
-          <option value="MBA">MBA</option>
-          <option value="MTECH">MTECH</option>
-        <!-- <input type="text" id="{{ form.course.id_for_label }}" name="{{ form.course.html_name }}" class="form-control" placeholder="Enter your full name" required> -->
+          {% for course in form.course.field.queryset %}
+            <option value="{{ course.pk }}">{{ course.coursename }}</option>
+          {% endfor %}
+      </select>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.fee.id_for_label }}">Total Fee:</label>
+        <select name="{{ form.fee.html_name }}" id="{{ form.fee.id_for_label }}" required>
+          <!-- <option selected disabled> Select Course: </option> -->
+          {% for fee in form.fee.field.queryset %}
+            <option value="{{ fee.fk }}">{{ fee.amount }}</option>
+          {% endfor %}
       </select>
       </div>
       <div class="form-group">
@@ -90,7 +98,7 @@
       </div>
       <div class="form-group">
         <label for="{{ form.dob.id_for_label }}">Date of Birth:</label>
-        <input type="date" id="{{ form.dob.id_for_label }}" name="{{ form.dob.html_name }}" class="form-control" max="2004-12-31" required>
+        <input type="date" id="{{ form.dob.id_for_label }}" name="{{ form.dob.html_name }}" class="form-control" max="2024-12-31" required>
       </div>
       <div class="form-group">
         <label for="{{ form.phone.id_for_label }}">Mobile Number:</label>
@@ -100,6 +108,13 @@
         <label for="{{ form.adhaarnumber.id_for_label }}">Aadhaar Card Number:</label>
         <input type="text" id="{{ form.adhaarnumber.id_for_label }}" name="{{ form.adhaarnumber.html_name }}" class="form-control" placeholder="Enter your adhaar number" required>
 	  </div>
+    <div class="form-group">
+      <label for="{{ form.fname.id_for_label }} ">Father Name:</label>
+      <input type="text" id="{{ form.fname.id_for_label }}" name="{{ form.fname.html_name }}" class="form-control" placeholder="Enter your Father's name" required>
+    </div><div class="form-group">
+      <label for="{{ form.mname.id_for_label }} ">Mother Name:</label>
+      <input type="text" id="{{ form.mname.id_for_label }}" name="{{ form.mname.html_name }}" class="form-control" placeholder="Enter your Mother's name" required>
+    </div>
 	  <div class="form-group">
         <label for="{{ form.address.id_for_label }}">Complete Address:</label>
         <textarea id="{{ form.address.id_for_label }}" name="{{ form.address.html_name }}" rows="4" class="form-control" placeholder="Enter your address here..." required></textarea>

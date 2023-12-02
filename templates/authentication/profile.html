@@ -20,8 +20,9 @@
 
   .profile-picture {
     max-width: 200px;
-    border-radius: 50%;
+    border-radius: 20%;
     margin-bottom: 20px;
+    margin-right: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 
@@ -62,9 +63,9 @@
 
 
     <div class="container">
-      <img
+      <img style="float: right;"
         class="profile-picture"
-        src="{% static 'images/profile.jpg' %}"
+        src="{% static 'images/profile2.jpeg' %}"
         alt="Profile Picture"
       />
       {% if user.is_authenticated %}
@@ -73,7 +74,7 @@
       <!-- <h4>You're successfully logged in.</h4> -->
 
       {% endif %}
-      <hr>
+      <!-- <hr> -->
       <div class="section-content">
         <h2 class="section-heading">Personal Information</h2>
         <p><strong>Full Name:</strong> {{ request.user.first_name }}&nbsp;{{ request.user.last_name }}</</p>

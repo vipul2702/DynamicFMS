@@ -14,11 +14,11 @@ from django.contrib.auth import authenticate, login, logout
 from . tokens import generate_token
 from django.contrib.auth.decorators import login_required
 # from rest_framework.response import Response
-# from authentication.serializers import StudentAdmissionSerializer
+# from authentication.serializers import EnrolledStudentSerializer
 # from rest_framework.views import APIView
 # from rest_framework import status
-from authentication.models import StudentAdmission
-from .forms import StudentAdmissionForm
+from authentication.models import EnrolledStudent
+from .forms import EnrolledStudentForm
 from .forms import ProfileForm
 
 def create_profile(request):
@@ -37,7 +37,7 @@ def showformdata(request):
     email = request.user.email
     fname = request.user.first_name +" "+ request.user.last_name
     admission_form = 'authentication/admissionform.html'
-    data = StudentAdmission.objects.all()
+    data = EnrolledStudent.objects.all()
     for i in data:
         if(i.email == request.user.email):
             admission_form = 'authentication/student_wait_approval.html'
@@ -45,17 +45,17 @@ def showformdata(request):
     if request.method == 'POST':
         
         
-        fm = StudentAdmissionForm(request.POST, request.FILES)
+        fm = EnrolledStudentForm(request.POST, request.FILES)
         if fm.is_valid() :
             fm.save()
             return render(request,"authentication/student_wait_approval.html")
     else:
-        fm = StudentAdmissionForm()
-    return render(request, admission_form, {'form':fm, 'email':email, 'fname':fname})
+        fm = EnrolledStudentForm()
+    return render(request, "authentication/admissionform.html", {'form':fm, 'email':email, 'fname':fname})
 
-# class StudentAdmissionView(APIView):
+# class EnrolledStudentView(APIView):
 #     def post(self, request, format=None):
-#         serializer = StudentAdmissionSerializer(data=request.data)
+#         serializer = EnrolledStudentSerializer(data=request.data)
 #         if serializer.is_valid():
 #             serializer.save()
 #             return Response({'msg':'Admission Form Upload Successfully', 'status': 'success',
@@ -63,8 +63,8 @@ def showformdata(request):
 #         return Response(serializer.errors)
 
 #     def get(self, request, format=None):
-#         candidates = StudentAdmission.objects.all()
-#         serializer = StudentAdmissionSerializer(candidates, many=True)
+#         candidates = EnrolledStudent.objects.all()
+#         serializer = EnrolledStudentSerializer(candidates, many=True)
 #         return Response({'status':'success', 'candidates':serializer.data}, status=status.Http_200_OK)
 
 
@@ -204,8 +204,6 @@ def dashboard(request):
             lname = user.last_name
             global email 
             email = user.email
-            # print(email)
-            # print("i love you jaan")
             
             return render(request, "authentication/dashboard.html", {'fname': fname, 'lname':lname})
         else:
