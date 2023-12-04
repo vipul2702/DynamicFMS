@@ -1,12 +1,13 @@
 from django.contrib import admin
-from authentication.models import EnrolledStudent
+from authentication.models import StudentAdmission
 from authentication.models import Course
 from authentication.models import Fee
 from authentication.models import Profile
+from authentication.models import FeePayment
 
 
 # Register StudentAdimission model using decorators
-@admin.register(EnrolledStudent)
+@admin.register(StudentAdmission)
 class StudentAdmissionAdmin(admin.ModelAdmin):
     list_display = ['enumber', 'fullname', 'course', 'gender', 'email', 'dob', 'phone', 'adhaarnumber', 'address', 'highmarks',
                     'intermarks', 'graduationmarks', 'profileimage', 'adhaarpdf', 'highschoolpdf', 'interpdf', 'graduationpdf']
@@ -15,11 +16,15 @@ class StudentAdmissionAdmin(admin.ModelAdmin):
 # admin.site.register(StudentAdmission, StudentAdmissionAdmin)
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ['course_code', 'coursename', 'courseduration', 'coursedescription', ]
+    list_display = [ 'coursename', 'courseduration', 'coursedescription', ]
 
 @admin.register(Fee)
 class FeeAdmin(admin.ModelAdmin):
-    list_display = ['id', 'feetype', 'amount', 'payment_date', 'feedescription', ]
+    list_display = [ 'feetype', 'totalfee', 'feedescription', ]
+
+@admin.register(FeePayment)
+class FeePaymentAdmin(admin.ModelAdmin):
+    list_display = [ 'name', 'amount', 'order_id', 'razor_payment_id', 'paid']
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):

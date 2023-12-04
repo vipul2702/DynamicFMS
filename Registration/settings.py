@@ -23,6 +23,8 @@ SECRET_KEY = 'django-insecure-t=t1snr*y-0v&q6+al0oj(r+h8sgdgi1dq&=1=+#1im*9e-59r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CSRF_FAILURE_VIEW = 'authentication.views.csrf_failure'
+
 ALLOWED_HOSTS = []
 
 
@@ -41,7 +43,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication',
     'dashboard',
+    # 'crispy_forms',
 ]
+
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

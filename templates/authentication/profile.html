@@ -62,58 +62,88 @@
 {% block content %}
 
 
-    <div class="container">
-      <img style="float: right;"
+<div class="container">
+  <div class="section-content">
+      <div class="row">
+        <div class="col col-sm-4">
+          <p><strong>Enrollment No.:</strong> {{ data.enumber }}</p>
+          {% for i in data %}
+        {% endfor %}
+        </div>
+      </div>
+      <hr>
+  
+      <div class="row">
+        <div class="col col-sm-5">
+          <h2 class="section-heading text-primary">Personal Information</h2> <hr>
+          <p><strong>Full Name:</strong> {{ request.user.first_name }}&nbsp;{{ request.user.last_name }}</</p>
+          <p><strong>Date of Birth:</strong> {{ data.dob }}</p>
+          <p><strong>Email:</strong> {{ request.user.email }}</p>
+          <p><strong>Phone:</strong> +1 123 456 7890</p>
+          <p><strong>Address:</strong> 123 Main Street, City, State, ZIP</p>
+        </div>
+        <div class="col col-sm-5">
+          <h2 class="section-heading text-primary">Qualifications </h2> <hr>
+          <div class="row">
+            <div class="col col-sm-6">
+              <p><strong>Course:</strong> MCA </p>
+            </div>
+            <div class="col col-sm-6">
+              <p><strong>Duration:</strong> 2 Years </p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="col col-sm-2">
+          <img style="float: right;"
         class="profile-picture"
         src="{% static 'images/profile2.jpeg' %}"
         alt="Profile Picture"
       />
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <table class="table table-hover">
+          <thead class="table-primary ">
+            <tr>
+              <th scope="col">Total Amount</th>
+              <th scope="col">Due Amount</th>
+              <th scope="col">Paid Amount</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Rs. 50000</th>
+              <td>Rs. 50000</td>
+              <td>0</td>
+              <td>
+                <a href="/payment"><button type="submit" class="btn btn-primary">
+                  Pay </button></a>
+                <a href="/feereceipt"><button type="submit" class="btn btn-primary">
+                Receipt </button></a>
+              </td>
+            </tr>          
+            
+          </tbody>
+        </table>
+      </div>
+      <div>
+        {% for i in data %}
+                {{i.dob}}
+        {% endfor %}
+      </div>
+    </div>
       {% if user.is_authenticated %}
       <!-- <h4 class="text-center">Welcome to Dashboard</h4> -->
       <!-- <h3>Hello {{ request.user.first_name }}&nbsp;{{ request.user.last_name }}</h3> -->
       <!-- <h4>You're successfully logged in.</h4> -->
 
       {% endif %}
-      <!-- <hr> -->
+            <!-- <hr> -->
+
       <div class="section-content">
-        <h2 class="section-heading">Personal Information</h2>
-        <p><strong>Full Name:</strong> {{ request.user.first_name }}&nbsp;{{ request.user.last_name }}</</p>
-        <p><strong>Date of Birth:</strong> {{ request.user.dob }}</p>
-        <p><strong>Email:</strong> {{ request.user.email }}</p>
-        <p><strong>Phone:</strong> +1 123 456 7890</p>
-        <p><strong>Address:</strong> 123 Main Street, City, State, ZIP</p>
-      </div>
-      <!-- <div class="section-content">
-        <h2 class="section-heading">Family Information</h2>
-        <table>
-          <tr>
-            <th>Relation</th>
-            <th>Name</th>
-            <th>Occupation</th>
-          </tr>
-          <tr>
-            <td>Parent</td>
-            <td>Jane Doe</td>
-            <td>Engineer</td>
-          </tr>
-          <tr>
-            <td>Parent</td>
-            <td>John Doe Sr.</td>
-            <td>Doctor</td>
-          </tr>
-          <tr>
-            <td>Sibling</td>
-            <td>Jennifer Doe</td>
-            <td>Student</td>
-          </tr>
-        </table>
-      </div>
-      <div class="section-content">
-        <h2 class="section-heading">Educational Information</h2>
-        <p><strong>University:</strong> XYZ University</p>
-        <p><strong>Major:</strong> Computer Science</p>
-        <p><strong>Expected Graduation:</strong> May 2024</p>
-        <p><strong>GPA:</strong> 3.8</p>
-      </div> -->
+        
     </div>
-{% endblock content %}
+{% endblock %}

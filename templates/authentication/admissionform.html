@@ -10,7 +10,8 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 100%;
+      max-height: 100%;
       margin: 0 auto;
       padding: 30px;
       background-color: #ffffff;
@@ -50,6 +51,10 @@
 
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
+  <div class="row">
+    <div class="col col-sm-6">
+      <h4 class="text-primary">Personal Details</h4>
+      <hr>
       <div class="form-group">
         <label for="{{ form.enumber.id_for_label }}">Enrollment/Application Number:</label>
         <input type="text" id="{{ form.enumber.id_for_label }}"  name="{{ form.enumber.html_name }}" class="form-control" placeholder="Enter your application number" required>
@@ -57,6 +62,13 @@
       <div class="form-group">
         <label for="{{ form.fullname.id_for_label }} ">Full Name:</label>
         <input type="text" id="{{ form.fullname.id_for_label }}" value="{{ fname }}"  name="{{ form.fullname.html_name }}" class="form-control" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.fname.id_for_label }} ">Father Name:</label>
+        <input type="text" id="{{ form.fname.id_for_label }}" name="{{ form.fname.html_name }}" class="form-control" placeholder="Enter your Father's name" required>
+      </div><div class="form-group">
+        <label for="{{ form.mname.id_for_label }} ">Mother Name:</label>
+        <input type="text" id="{{ form.mname.id_for_label }}" name="{{ form.mname.html_name }}" class="form-control" placeholder="Enter your Mother's name" required>
       </div>
       <div class="form-group">
         <label for="{{ form.course.id_for_label }}">Select Course:</label>
@@ -67,15 +79,7 @@
           {% endfor %}
       </select>
       </div>
-      <div class="form-group">
-        <label for="{{ form.fee.id_for_label }}">Total Fee:</label>
-        <select name="{{ form.fee.html_name }}" id="{{ form.fee.id_for_label }}" required>
-          <!-- <option selected disabled> Select Course: </option> -->
-          {% for fee in form.fee.field.queryset %}
-            <option value="{{ fee.fk }}">{{ fee.amount }}</option>
-          {% endfor %}
-      </select>
-      </div>
+      
       <div class="form-group">
         <label for="{{ form.gender.id_for_label }}">Gender:</label>
         <div style="display: inline; padding: 20px;">
@@ -108,17 +112,15 @@
         <label for="{{ form.adhaarnumber.id_for_label }}">Aadhaar Card Number:</label>
         <input type="text" id="{{ form.adhaarnumber.id_for_label }}" name="{{ form.adhaarnumber.html_name }}" class="form-control" placeholder="Enter your adhaar number" required>
 	  </div>
-    <div class="form-group">
-      <label for="{{ form.fname.id_for_label }} ">Father Name:</label>
-      <input type="text" id="{{ form.fname.id_for_label }}" name="{{ form.fname.html_name }}" class="form-control" placeholder="Enter your Father's name" required>
-    </div><div class="form-group">
-      <label for="{{ form.mname.id_for_label }} ">Mother Name:</label>
-      <input type="text" id="{{ form.mname.id_for_label }}" name="{{ form.mname.html_name }}" class="form-control" placeholder="Enter your Mother's name" required>
-    </div>
 	  <div class="form-group">
         <label for="{{ form.address.id_for_label }}">Complete Address:</label>
         <textarea id="{{ form.address.id_for_label }}" name="{{ form.address.html_name }}" rows="4" class="form-control" placeholder="Enter your address here..." required></textarea>
       </div>
+    </div>
+
+    <div class="col col-sm-6">
+      <h4 class="text-primary">Qualifications</h4>
+      <hr>
       <div class="form-group">
         <label for="{{ form.highmarks.id_for_label }}">10th Grade Marks:</label>
         <input type="number" id="{{ form.highmarks.id_for_label }}" name="{{ form.highmarks.html_name }}" class="form-control" placeholder="in percentage" value="00.00" required>
@@ -136,29 +138,32 @@
         </div>
         <div class="custom-file">
           <label  for="{{ form.profileimage.id_for_label }}"><b> Upload Profile Picture (passport size, jpeg):</b></label>
-          <input type="file"  id="{{ form.profileimage.id_for_label }}" name="{{ form.profileimage.html_name }}" style="margin-left: 83px;" required multiple>
+          <input type="file"  id="{{ form.profileimage.id_for_label }}" name="{{ form.profileimage.html_name }}" required multiple>
         </div>
         <div class="custom-file">
           <label  for="{{ form.adhaarpdf.id_for_label }}"><b> Upload Adhaar Card (PDF form):</b></label>
-          <input type="file"  id="{{ form.adhaarpdf.id_for_label }}" name="{{ form.adhaarpdf.html_name }}" style="margin-left: 165px;" required multiple>
+          <input type="file"  id="{{ form.adhaarpdf.id_for_label }}" name="{{ form.adhaarpdf.html_name }}" required multiple>
         </div>
         <div class="custom-file">
           <label for="{{ form.highschoolpdf.id_for_label }}"><b> Upload 10th Marksheet (PDF form):</b></label>
-          <input type="file" id="{{ form.highschoolpdf.id_for_label }}" name="{{ form.highschoolpdf.html_name }}" style="margin-left: 140px;" required multiple>
+          <input type="file" id="{{ form.highschoolpdf.id_for_label }}" name="{{ form.highschoolpdf.html_name }}" required multiple>
         </div>
         <div class="custom-file">
           <label for="{{ form.interpdf.id_for_label }}"><b>Upload 12th Marksheet (PDF form):</b></label>
-          <input type="file" id="{{ form.interpdf.id_for_label }}" name="{{ form.interpdf.html_name }}" style="margin-left: 141px;" required multiple>
+          <input type="file" id="{{ form.interpdf.id_for_label }}" name="{{ form.interpdf.html_name }}" required multiple>
         </div>
         <div class="custom-file">
           <label for="{{ form.graduationpdf.id_for_label }}"><b>Upload Graduation Marksheet (Combined,PDF form):</b></label>
-          <input type="file" id="{{ form.graduationpdf.id_for_label }}" name="{{ form.graduationpdf.html_name }}" style="margin-left: 9px;" required multiple>
+          <input type="file" id="{{ form.graduationpdf.id_for_label }}" name="{{ form.graduationpdf.html_name }}" required multiple>
         </div>
       </div>
-      <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </form>
+    </div>
+    <br><br>
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+  </form>
   </div>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

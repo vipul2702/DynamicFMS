@@ -8,12 +8,14 @@ from django.contrib.auth import views as auth_views
 # from .views import create_profile
 
 urlpatterns = [
-    path('logout/', RedirectView.as_view(url = '/admin/logout/')),
     path('admin/', admin.site.urls),
+    path('logout/', RedirectView.as_view(url = '/admin/logout/')),
     path('', views.home, name="home"),
     # path('create-profile/', create_profile, name='create_profile'),
     # path('StudentAdmission/', views.StudentAdmissionView.as_view(), name="StudentAdmission"),
     # path('list/', views.StudentAdmissionView.as_view(), name="list"),
+    path('payment_status', views.payment_status, name="payment_status"),
+    path('payment', views.payment, name="payment"),
     path('signup', views.signup, name="signup"),
     path('signin', views.signin, name="signin"),
     path('signout', views.signout, name="signout"),
@@ -21,7 +23,6 @@ urlpatterns = [
     path('about', views.about, name="about"),
     path('contact', views.contact, name="contact"),
     path('admissionform', views.showformdata, name="admissionform"),
-    path('payment', views.payment, name="payment"),
     path('profile', views.profile, name="profile"),
     path('registration', views.create_profile, name="showformdata"),   
     path('student_wait', views.student_wait, name=""),

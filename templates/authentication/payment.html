@@ -1,77 +1,61 @@
 {% extends "base.html" %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/pay.css' %}" />
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/pay.css' %}" /> -->
 {% endblock css %}
 
 {% block content %}
-    
-    <header>
-      <div class="container">
-        <div class="left">
-          <h3>BILLING ADDRESS</h3>
-          <form>
-            Full name
-            <input type="text" name="" placeholder="Enter name" />
-            Email
-            <input type="text" name="" placeholder="Enter email" />
-
-            Address
-            <input type="text" name="" placeholder="Enter address" />
-
-            City
-            <input type="text" name="" placeholder="Enter City" />
-            <div id="zip">
-              <label>
-                State
-                <select>
-                  <option>Choose State..</option>
-                  <option>Rajasthan</option>
-                  <option>Hariyana</option>
-                  <option>Uttar Pradesh</option>
-                  <option>Madhya Pradesh</option>
-                </select>
-              </label>
-              <label>
-                Zip code
-                <input type="number" name="" placeholder="Zip code" />
-              </label>
-            </div>
-          </form>
-        </div>
-        <div class="right">
-          <h3>PAYMENT</h3>
-          <form>
-            Accepted Card <br />
-            <img src="{% static 'images/card1.png' %}" width="100" />
-            <img src="{% static 'images/card2.png' %}" width="50" />
-            <br /><br />
-
-            Credit card number
-            <input type="text" name="" placeholder="Enter card number" />
-
-            Exp month
-            <input type="text" name="" placeholder="Enter Month" />
-            <div id="zip">
-              <label>
-                Exp year
-                <select>
-                  <option>Choose Year..</option>
-                  <option>2022</option>
-                  <option>2023</option>
-                  <option>2024</option>
-                  <option>2025</option>
-                </select>
-              </label>
-              <label>
-                CVV
-                <input type="number" name="" placeholder="CVV" />
-              </label>
-            </div>
-          </form>
-          <input type="submit" name="" value="Proceed to Checkout" />
+ 
+<div class="container">
+  <h2 class="text-center">Payment</h2> <hr>
+  <!-- {{ form }} -->
+  <div class="container">
+    <form method="post">
+      {% csrf_token %}
+    <div class="row">
+      <div class="col col-sm-6">
+        <div class="form-group">
+          <label for="name"><strong>Enter Name</strong></label>
+          <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required>
         </div>
       </div>
-    </header>
+      <div class="col col-sm-6">
+        <div class="form-group">
+          <label for="amount"><strong>Enter Amount</strong></label>
+          <input type="text" id="amount"  name="amount" class="form-control" placeholder="Enter amount" required>
+          <br>
+        </div>
+      </div> <hr>
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+
+    <!-- Razorpay Button -->
+    {% if payment %}
+      <form action="{% url 'payment_status' %}" method="post">
+        {% csrf_token %}
+        <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key = "rzp_test_tD2iMN2MtNXkvn"
+            data-amount="{{ payment.amount }}"
+            data-currency="{{ payment.currency }}"
+            data-order_id= "{{ payment.id }}"
+            data-buttontext="Pay With Razorpay"
+            data-name="Fees Management System"
+            data-description="A fee management system is used as task management software that automates collecting fees and generating fee receipts. It eliminates duplicate data entries and minimizes errors when entering entries into school accounts"
+            data-image="https://example.com/your_logo.jpg"
+            data-prefill.name="{{ payment.name }}"
+            data-prefill.email="your@gmail.com"
+            data-theme.color="#F37254" >
+        </script>
+        <input type="hidden" custom="Hidden Element" name="hidden">
+      </form>
+    {% endif %}
+
+    </div>
+  </div>
     
-    {% endblock content %}
+</div>
+    
+{% endblock content %}

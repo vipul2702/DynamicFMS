@@ -17,9 +17,14 @@ from django.contrib.auth.decorators import login_required
 # from authentication.serializers import EnrolledStudentSerializer
 # from rest_framework.views import APIView
 # from rest_framework import status
-from authentication.models import EnrolledStudent
-from .forms import EnrolledStudentForm
+from authentication.models import StudentAdmission
+from .forms import StudentAdmissionForm
 from .forms import ProfileForm
+from .forms import FeePaymentForm
+from .forms import FeePayment
+import razorpay
+from django.views.decorators.csrf import csrf_exempt
+
 
 def create_profile(request):
     if request.method == 'POST':
@@ -36,22 +41,21 @@ def create_profile(request):
 def showformdata(request):
     email = request.user.email
     fname = request.user.first_name +" "+ request.user.last_name
-    admission_form = 'authentication/admissionform.html'
-    data = EnrolledStudent.objects.all()
-    for i in data:
+    # admission_form = 'authentication/admissionform.html'
+    form = StudentAdmission.objects.all()
+    for i in form:
         if(i.email == request.user.email):
             admission_form = 'authentication/student_wait_approval.html'
             break
     if request.method == 'POST':
-        
-        
-        fm = EnrolledStudentForm(request.POST, request.FILES)
+        fm = StudentAdmissionForm(request.POST, request.FILES)
         if fm.is_valid() :
             fm.save()
             return render(request,"authentication/student_wait_approval.html")
     else:
-        fm = EnrolledStudentForm()
+        fm = StudentAdmissionForm()
     return render(request, "authentication/admissionform.html", {'form':fm, 'email':email, 'fname':fname})
+    # return render(request, "authentication/admissionform.html", {'form':fm})
 
 # class EnrolledStudentView(APIView):
 #     def post(self, request, format=None):
@@ -174,7 +178,6 @@ def signout(request):
     return redirect('home')
 
 def signin(request):
-
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['pass1']
@@ -242,9 +245,61 @@ def admissionform(request):
     return render(request, "authentication/admissionform.html")
 
 def payment(request):
-    return render(request, "authentication/payment.html")
+    if request.method == "POST":
+        name = request.POST.get("name")
+        # amount = request.POST.get("amount")
+        amount = int(request.POST.get("amount"))*100
+        # create razorpay client
+        client = razorpay.Client(auth = ("rzp_test_tD2iMN2MtNXkvn", "ZPomIdSDuPB5xg0e2GhKMUSk"))
+        # create order
+        # response_payment = client.order.create(dict(amount=amount,currency='INR'))
+        response_payment = client.order.create({'amount':amount,'currency':'INR', 'payment_capture':'1'})
+        print(response_payment)
+        order_id = response_payment['id']
+        order_status = response_payment['status']
+
+        if order_status == 'created':
+            feepay = FeePayment(name=name,amount=amount,order_id=order_id)
+            feepay.save()
+            response_payment['name'] = name
+            
+            form = FeePaymentForm(request.POST or None)
+            return render(request, "authentication/payment.html", {"form":form, "payment":response_payment})
+
+    form = FeePaymentForm()
+    return render(request, "authentication/payment.html", {"form":form})
+
+@csrf_exempt
+def payment_status(request):
+    response = request.POST
+    # print(response)
+    params_dict = {
+        'razorpay_order_id': response['razorpay_order_id'],
+        'razorpay_payment_id': response['razorpay_payment_id'],
+        'razorpay_signature': response['razorpay_signature']
+        }
+    # client instance
+    client = razorpay.Client(auth = ("rzp_test_tD2iMN2MtNXkvn", "ZPomIdSDuPB5xg0e2GhKMUSk"))
+    
+    try: 
+        status = client.utility.verify_payment_signature(params_dict)
+        feepay = FeePayment.objects.get(order_id=response['razorpay_order_id'])
+        feepay.razorpay_payment_id = response['razorpay_payment_id']
+        feepay.paid = True
+        feepay.save()
+        return render(request, 'authentication/payment_status.html', {'status':True})
+    except:
+        return render(request, 'authentication/payment_status.html', {'status':False})
+    
+    # return render(request, 'authentication/payment_status.html')
 
 def profile(request):
+    email = request.user.email
+    data = StudentAdmission.objects.all()
+    # print(data)
+    for i in data:
+        if(i.email == request.user.email):
+            return render(request, "authentication/profile.html",{'data':data})
     return render(request, "authentication/profile.html")
 
 def feereceipt(request):
@@ -265,3 +320,9 @@ def about(request):
 
 def contact(request):
     return render(request, 'authentication/contact.html')
+
+# views.py
+from django.http import HttpResponseForbidden
+
+def csrf_failure(request, reason=""):
+    return HttpResponseForbidden('CSRF verification failed. Reason: {}'.format(reason))
