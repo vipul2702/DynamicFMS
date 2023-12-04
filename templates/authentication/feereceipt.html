@@ -1,39 +1,125 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/feereceipt.css' %}" />
+{% block css %}
+<style>
+  body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
 
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+
+  .profile-picture {
+    max-width: 200px;
+    border-radius: 20%;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .section-heading {
+    margin: 0;
+    color: #333;
+  }
+
+  .section-content {
+    margin-bottom: 20px;
+  }
+
+  .section-content p {
+    margin: 5px 0;
+    color: #666;
+  }
+
+  .section-content table {
+    width: 100%;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+  }
+
+  .section-content th,
+  .section-content td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .section-content th {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+</style>
+{% endblock css %}
 {% block content %}
-
-    <div class="container">
-      <h2>Payment Receipt</h2>
-      <table class="receipt-table">
-        <tr>
-          <th>Date:</th>
-          <td>June 1, 2023</td>
-        </tr>
-        <tr>
-          <th>ID Number:</th>
-          <td>12345</td>
-        </tr>
-        <tr>
-          <th>Registration ID:</th>
-          <td>67890</td>
-        </tr>
-        <tr>
-          <th>Name:</th>
-          <td>John Doe</td>
-        </tr>
-        <tr>
-          <th>Paid Amount:</th>
-          <td>$100</td>
-        </tr>
-        <tr>
-          <th>Remarks:</th>
-          <td class="remarks">Payment for college application fee.</td>
-        </tr>
-      </table>
-      <div class="print-button">
-        <button onclick="window.print()">Print Receipt</button>
+  <div class="container">
+     <div class="section-content">
+      <div class="row">
+        <div class="col col-sm-4">
+          {% for i in data %}
+          <p><strong>Enrollment No.:</strong> {{ i.enumber }}</p>
+        </div>
       </div>
-    </div>
-    {% endblock content %}
+      <hr>
+  
+      <div class="row">
+        <div class="col col-sm-5">
+          <h2 class="section-heading text-primary">Student Information</h2> <hr>
+          <p><strong>Full Name:</strong> {{ i.fullname }}</p>
+          <p><strong>Gender:</strong> {{ i.gender }}</p>
+          <p><strong>Date of Birth:</strong> {{ i.dob }}</p>
+          <p><strong>Email:</strong> {{ i.email }}</p>
+          <p><strong>Phone:</strong> {{ i.phone }}</p>
+          <p><strong>Address:</strong> {{ i.address }}</p>
+        </div>
+        <div class="col col-sm-5">
+          <h2 class="section-heading text-primary">Qualifications </h2> <hr>
+          <div class="row">
+            <div class="col col-sm-6">
+              <p><strong>Course:</strong> {{ i.course }} </p>
+            </div>
+            <div class="col col-sm-6">
+              <p><strong>Duration:</strong> 2 Years </p>
+            </div>
+          </div>
+        {% endfor %}  
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <h2 class="section-heading text-center text-primary mb-3">Payment Receipt </h2> <br> <hr> 
+        <div class="container m-4" style="width: 90%;">
+
+          <div class="section-content m-5">
+            <div class="row">
+              <div class="col-sm-6">
+                <p><strong>Name:</strong> {{name}} </p>
+                <p><strong>Amount:</strong> {{amount}} </p>
+              </div>
+              <div class="col-sm-6 text-center">
+                <p><strong>Order Id:</strong> {{order_id}} </p>
+                <p><strong>Payment Id:</strong> {{payment_id}} </p>
+
+              </div>
+                <div class="print-button text-center">
+                 <hr> <br> <br> <br> <button onclick="window.print()" class="btn btn-primary">Print Receipt</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+     </div>
+  </div>
+{% endblock content %}
+
+

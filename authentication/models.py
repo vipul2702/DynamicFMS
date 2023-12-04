@@ -1,7 +1,12 @@
 from django.db import models
+# from django.contrib.auth.models import AbstractUser
 # from datetime import date
 
 # Create your models here.
+
+# class CustomUser(AbstractUser):
+#     is_registered = models.BooleanField(default=False)
+#     is_paid = models.BooleanField(default=False)
 
 class StudentAdmission(models.Model):
     enumber = models.IntegerField()
@@ -33,14 +38,15 @@ class Course(models.Model):
     coursename=models.CharField(max_length=100)
     courseduration=models.CharField(max_length=100)
     coursedescription=models.TextField()
+    totalfee=models.IntegerField(default=0)
     
     def __str__(self):
         return self.coursename
 
-class Fee(models.Model):
-    feetype=models.CharField(max_length=100)
-    totalfee=models.IntegerField()
-    feedescription=models.TextField()
+# class Fee(models.Model):
+    # feetype=models.CharField(max_length=100)
+    # totalfee=models.IntegerField()
+    # feedescription=models.TextField()
       
 class Profile(models.Model):
     name = models.CharField(max_length=255)
@@ -51,6 +57,7 @@ class Profile(models.Model):
 class FeePayment(models.Model):
     name = models.CharField(max_length=100)
     amount = models.CharField(max_length=100)
+    email = models.CharField(max_length=100, default=None)
     order_id = models.CharField(max_length=100, blank=True)
     razor_payment_id = models.CharField(max_length=100, blank=True)
     paid = models.BooleanField(default=False)

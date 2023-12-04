@@ -25,6 +25,8 @@ from .forms import FeePayment
 import razorpay
 from django.views.decorators.csrf import csrf_exempt
 
+is_registered = False
+is_paid = False
 
 def create_profile(request):
     if request.method == 'POST':
@@ -39,6 +41,13 @@ def create_profile(request):
 
 @login_required(login_url='/signin')
 def showformdata(request):
+    is_registered = False
+    data = StudentAdmission.objects.filter(email=request.user.email)
+    for i in data:
+        print(i.adhaarnumber)
+        if i.adhaarnumber is not None:
+            is_registered = True
+    print(is_registered)
     email = request.user.email
     fname = request.user.first_name +" "+ request.user.last_name
     # admission_form = 'authentication/admissionform.html'
@@ -54,7 +63,7 @@ def showformdata(request):
             return render(request,"authentication/student_wait_approval.html")
     else:
         fm = StudentAdmissionForm()
-    return render(request, "authentication/admissionform.html", {'form':fm, 'email':email, 'fname':fname})
+    return render(request, "authentication/admissionform.html", {'form':fm, 'email':email, 'fname':fname, 'is_registered': is_registered})
     # return render(request, "authentication/admissionform.html", {'form':fm})
 
 # class EnrolledStudentView(APIView):
@@ -74,6 +83,7 @@ def showformdata(request):
 
 # Create your views here.
 def home(request):
+    data = StudentAdmission()
     return render(request, "authentication/index.html")
 
 def signup(request):
@@ -94,6 +104,8 @@ def signup(request):
         email = request.POST['email'] 
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
+        # is_registered = False
+        # is_paid = False
 
         if User.objects.filter(username=username):
                 messages.warning(request, "Username already exist! please try some other username")
@@ -115,10 +127,13 @@ def signup(request):
             messages.warning(request, "Username must be Alpha-Numeric!")    
             return redirect('home')
 
-        myuser = User.objects.create_user(username, email, pass1)
+        myuser = User.objects.create_user(username, email, pass1,)
         myuser.first_name = fname
         myuser.last_name = lname
         myuser.is_active = False
+        # myuser.is_registered = False
+        # myuser.is_paid = False
+        
 
         myuser.save()
 
@@ -208,6 +223,7 @@ def dashboard(request):
             global email 
             email = user.email
             
+            
             return render(request, "authentication/dashboard.html", {'fname': fname, 'lname':lname})
         else:
             # verifyLogin = myuser.is_active
@@ -236,19 +252,35 @@ def admissionform(request):
             lname = user.last_name
             global email 
             email = user.email
-            print(email)
-            print("i love you jaan")
-            return render(request, "authentication/admissionform.html", {'fname': fname, 'lname':lname})
+            
+            
+            return render(request, "authentication/admissionforms.html", {'fname': fname, 'lname':lname, 'is_registered':is_registered})
         else:
             messages.error(request, "Invalid User!")
             return redirect('home')
-    return render(request, "authentication/admissionform.html")
+    print(email)
+    print("i love you jaan")
+    return render(request, "authentication/admissionforms.html")
 
 def payment(request):
     if request.method == "POST":
-        name = request.POST.get("name")
+        feeCourse = StudentAdmission.objects.filter(email=request.user.email)
+        amount = 0
+        name = ""
+        email = ""
+        for i in feeCourse:
+            if i.course == "MBA":
+                amount = 14000000
+            else:
+                amount = 15300000
+            name = i.fullname
+            email = i.email    
+            print(i.course)
+        # name = request.POST.get("name")
+        # email = request.POST.get("email")
         # amount = request.POST.get("amount")
-        amount = int(request.POST.get("amount"))*100
+        # amount = request.POST.get("amount")
+        print(amount)
         # create razorpay client
         client = razorpay.Client(auth = ("rzp_test_tD2iMN2MtNXkvn", "ZPomIdSDuPB5xg0e2GhKMUSk"))
         # create order
@@ -259,20 +291,44 @@ def payment(request):
         order_status = response_payment['status']
 
         if order_status == 'created':
-            feepay = FeePayment(name=name,amount=amount,order_id=order_id)
+            feepay = FeePayment(name=name,email=email,amount=amount/100,order_id=order_id)
             feepay.save()
             response_payment['name'] = name
             
             form = FeePaymentForm(request.POST or None)
             return render(request, "authentication/payment.html", {"form":form, "payment":response_payment})
-
+    
+    emailData = StudentAdmission.objects.filter(email=request.user.email)
+    email = ""
+    course = ""
+    fullname = ""
+    fee = 0
+    
+    for i in emailData:
+        email = i.email
+        fullname = i.fullname
+        course = i.course
+        print(course)
+        if course == "MCA":
+            fee = 153000
+        else:
+            fee = 140000
+    print(is_registered)
+    # print(email)
+    print(emailData)
+    feeData = FeePayment.objects.filter(email=request.user.email)
+    is_paid = False
+    for i in feeData:
+        is_paid = i.paid
+        print(is_paid)
+    
     form = FeePaymentForm()
-    return render(request, "authentication/payment.html", {"form":form})
+    return render(request, "authentication/payment.html", {"form":form, 'email':email, 'fullname':fullname, 'fee':fee, 'course':course})
 
 @csrf_exempt
 def payment_status(request):
     response = request.POST
-    # print(response)
+    print(response)
     params_dict = {
         'razorpay_order_id': response['razorpay_order_id'],
         'razorpay_payment_id': response['razorpay_payment_id'],
@@ -283,10 +339,13 @@ def payment_status(request):
     
     try: 
         status = client.utility.verify_payment_signature(params_dict)
-        feepay = FeePayment.objects.get(order_id=response['razorpay_order_id'])
-        feepay.razorpay_payment_id = response['razorpay_payment_id']
-        feepay.paid = True
-        feepay.save()
+        pay = FeePayment.objects.get(order_id=response['razorpay_order_id'])
+        pay.razor_payment_id = response['razorpay_payment_id']
+        pay.paid = True
+        pay.save()
+        # print(status)
+        # print(pay)
+        # print(pay.razor_payment_id)
         return render(request, 'authentication/payment_status.html', {'status':True})
     except:
         return render(request, 'authentication/payment_status.html', {'status':False})
@@ -294,16 +353,47 @@ def payment_status(request):
     # return render(request, 'authentication/payment_status.html')
 
 def profile(request):
-    email = request.user.email
-    data = StudentAdmission.objects.all()
-    # print(data)
-    for i in data:
-        if(i.email == request.user.email):
-            return render(request, "authentication/profile.html",{'data':data})
-    return render(request, "authentication/profile.html")
+    emailData = StudentAdmission.objects.filter(email=request.user.email)
+    # course = StudentAdmission.objects.filter(course=request.user.email)
+    fee = 0
+    for i in emailData:
+        print(i.course)
+        if i.course == "MCA":
+            fee = 153000
+        else:
+            fee = 140000
+    print(is_registered)
+    # print(email)
+    print(emailData)
+    feeData = FeePayment.objects.filter(email=request.user.email)
+    is_paid = False
+    for i in feeData:
+        is_paid = i.paid
+        print(is_paid)
+    # if request.method == "POST":
+    #     email = request.POST.get("email")
+    #     if email != None:
+    #         emailData = StudentAdmission.objects.filter(email=request.user.email)
+    #         print(emailData)
+    return render(request, "authentication/profile.html",{'data':emailData, 'fee':fee, 'is_paid':is_paid})
+    # for i in data:
+    #     if(i.email == request.user.email):
+    #         return render(request, "authentication/profile.html",{'data':data})
+    # return render(request, "authentication/profile.html")
 
 def feereceipt(request):
-    return render(request, "authentication/feereceipt.html")
+    details = FeePayment.objects.filter(email=request.user.email)
+    name = ""
+    amount = ""
+    order_id = ""
+    payment_id = ""
+    for i in details:
+        name = i.name
+        amount = i.amount
+        order_id = i.order_id
+        payment_id = i.razor_payment_id
+    print(details)
+    return render(request, "authentication/feereceipt.html", {'name':name, "amount":amount, "order_id":order_id, "payment_id":payment_id})
 
 def helo(request):
     return render(request, "authentication/helo.html")

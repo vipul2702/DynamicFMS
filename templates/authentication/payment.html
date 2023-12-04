@@ -15,19 +15,27 @@
     <div class="row">
       <div class="col col-sm-6">
         <div class="form-group">
-          <label for="name"><strong>Enter Name</strong></label>
-          <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required>
+          <label for="name"><strong>Name</strong></label>
+          <input type="text" name="name" id="name" class="form-control" placeholder="{{fullname}}" disabled>
+        </div>
+        <div class="form-group">
+          <label for="email"><strong> Email</strong></label>
+          <input type="email" name="email" id="email" class="form-control" placeholder="{{email}}" disabled>
         </div>
       </div>
       <div class="col col-sm-6">
         <div class="form-group">
-          <label for="amount"><strong>Enter Amount</strong></label>
-          <input type="text" id="amount"  name="amount" class="form-control" placeholder="Enter amount" required>
+          <label for="amount"><strong> Amount</strong></label>
+          <input type="text" id="amount"  name="amount" class="form-control" placeholder="{{fee}}" disabled>
+        </div>
+        <div class="form-group">
+          <label for="course"><strong> Course</strong></label>
+          <input type="text" name="course" id="course" class="form-control" placeholder="{{course}}" disabled>
           <br>
         </div>
-      </div> <hr>
+      </div>  <hr>
       <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Pay Now</button>
       </div>
     </form>
 
@@ -46,7 +54,7 @@
             data-description="A fee management system is used as task management software that automates collecting fees and generating fee receipts. It eliminates duplicate data entries and minimizes errors when entering entries into school accounts"
             data-image="https://example.com/your_logo.jpg"
             data-prefill.name="{{ payment.name }}"
-            data-prefill.email="your@gmail.com"
+            data-prefill.email="{{ payment.email}}"
             data-theme.color="#F37254" >
         </script>
         <input type="hidden" custom="Hidden Element" name="hidden">

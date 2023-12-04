@@ -66,9 +66,8 @@
   <div class="section-content">
       <div class="row">
         <div class="col col-sm-4">
-          <p><strong>Enrollment No.:</strong> {{ data.enumber }}</p>
           {% for i in data %}
-        {% endfor %}
+          <p><strong>Enrollment No.:</strong> {{ i.enumber }}</p>
         </div>
       </div>
       <hr>
@@ -76,17 +75,18 @@
       <div class="row">
         <div class="col col-sm-5">
           <h2 class="section-heading text-primary">Personal Information</h2> <hr>
-          <p><strong>Full Name:</strong> {{ request.user.first_name }}&nbsp;{{ request.user.last_name }}</</p>
-          <p><strong>Date of Birth:</strong> {{ data.dob }}</p>
-          <p><strong>Email:</strong> {{ request.user.email }}</p>
-          <p><strong>Phone:</strong> +1 123 456 7890</p>
-          <p><strong>Address:</strong> 123 Main Street, City, State, ZIP</p>
+          <p><strong>Full Name:</strong> {{ i.fullname }}</p>
+          <p><strong>Gender:</strong> {{ i.gender }}</p>
+          <p><strong>Date of Birth:</strong> {{ i.dob }}</p>
+          <p><strong>Email:</strong> {{ i.email }}</p>
+          <p><strong>Phone:</strong> {{ i.phone }}</p>
+          <p><strong>Address:</strong> {{ i.address }}</p>
         </div>
         <div class="col col-sm-5">
           <h2 class="section-heading text-primary">Qualifications </h2> <hr>
           <div class="row">
             <div class="col col-sm-6">
-              <p><strong>Course:</strong> MCA </p>
+              <p><strong>Course:</strong> {{ i.course }} </p>
             </div>
             <div class="col col-sm-6">
               <p><strong>Duration:</strong> 2 Years </p>
@@ -97,13 +97,16 @@
         <div class="col col-sm-2">
           <img style="float: right;"
         class="profile-picture"
-        src="{% static 'images/profile2.jpeg' %}"
+        src="/media/{{ i.profileimage}}"
         alt="Profile Picture"
       />
+      <!-- src="/media/Profiles/kashif.jpeg" -->
+      <!-- src="{% static 'Profile/kashif.jpeg' %}" -->
         </div>
       </div>
       <hr>
       <div class="row">
+        <h2 class="section-heading text-primary mb-3">Fee Info </h2> <br> <hr> 
         <table class="table table-hover">
           <thead class="table-primary ">
             <tr>
@@ -115,14 +118,27 @@
           </thead>
           <tbody>
             <tr>
-              <th scope="row">Rs. 50000</th>
-              <td>Rs. 50000</td>
-              <td>0</td>
+              <th scope="row">Rs. {{ fee }}</th>
+              {% if is_paid %}
+                <td>Rs. 0</td>
+                
+                {% else %}
+                <td>Rs. {{ fee }}</td>
+              {% endif %}
+              {% if not is_paid %}
+                <td>Rs. 0</td>
+                
+                {% else %}
+                <td>Rs. {{ fee }}</td>
+              {% endif %}
               <td>
+                {% if not is_paid %}
                 <a href="/payment"><button type="submit" class="btn btn-primary">
                   Pay </button></a>
+                  {% else %}
                 <a href="/feereceipt"><button type="submit" class="btn btn-primary">
                 Receipt </button></a>
+                {% endif %}
               </td>
             </tr>          
             
@@ -130,9 +146,8 @@
         </table>
       </div>
       <div>
-        {% for i in data %}
-                {{i.dob}}
         {% endfor %}
+        
       </div>
     </div>
       {% if user.is_authenticated %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/feereceipt.css' %}" />
+
+{% block content %}
+
+    <div class="container">
+      <h2>Payment Receipt</h2>
+      <table class="receipt-table">
+        <tr>
+          <th>Date:</th>
+          <td>June 1, 2023</td>
+        </tr>
+        <tr>
+          <th>ID Number:</th>
+          <td>12345</td>
+        </tr>
+        <tr>
+          <th>Registration ID:</th>
+          <td>67890</td>
+        </tr>
+        <tr>
+          <th>Name:</th>
+          <td>John Doe</td>
+        </tr>
+        <tr>
+          <th>Paid Amount:</th>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <th>Remarks:</th>
+          <td class="remarks">Payment for college application fee.</td>
+        </tr>
+      </table>
+      <div class="print-button">
+        <button onclick="window.print()">Print Receipt</button>
+      </div>
+    </div>
+    {% endblock content %}
