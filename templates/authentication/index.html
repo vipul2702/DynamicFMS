@@ -16,14 +16,15 @@
     <title>HomePage</title>
   <style>
     body{
-      background-color: rgb(200, 233, 168);
+      background-color: rgb(108, 165, 235);
     }
     h3{
-      color: white;
+      color: darkblue;
       text-transform: capitalize;
       font-size: 1.75rem;
     }
     li{
+      color: aliceblue;
       font-weight: 700;
       font-size: 18px;
     }
@@ -185,14 +186,14 @@
 
   <!-- The slideshow/carousel -->
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="{% static 'images/fee-m-1.webp' %}" alt="Los Angeles" class="d-block w-100">
+    <div class="carousel-item active" style = "height : 395px; margin-top: 40px" >
+      <img src="{% static 'images/fee-slide.jpeg' %}" alt="Los Angeles" class="d-block w-100">
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item" style = "height : 395px; margin-top: 40px">
       <img src="{% static 'images/fee-m-2-01.jpg' %}" alt="Chicago" class="d-block w-100">
     </div>
-    <div class="carousel-item">
-      <img src="{% static 'images/fee-m-3.webp' %}" alt="New York" class="d-block w-100">
+    <div class="carousel-item" style = "height : 395px; margin-top: 40px">
+      <img src="{% static 'images/fee-m-1.webp' %}" alt="New York" class="d-block w-100">
     </div>
   </div>
 
@@ -210,34 +211,34 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <h4 class="display-6 text-center mt-5 mb-5">A comprehensive student fee management system that automates,
+          <h4 class="display-6 text-center mt-5 mb-5 " style = "color: darkblue">A comprehensive student fees management system that automates,
              streamlines and transforms the complex fee processing to drive efficiency and reduce costs.<h4>
         </div>
       </div>
       <div class="row mb-5 justify-content-evenly pt-3 pb-3">
-        <div class="col-md-3 text-center ">
+        <div class="col-md-3 text-center " style = "background-color: cornflowerblue; color: aliceblue;">
           <h1><i class="bi bi-bookmarks  text-primary"></i></h1>
-          <h5>Easy Categorization </h5>
+          <h5 style = "color : blue">Easy Categorization </h5>
           <p>Categorize students into separate groups to monitor their fee collection separately </p>
         </div>
-        <div class="col-md-3 text-center ">
+        <div class="col-md-3 text-center " style = "background-color: cornflowerblue; color: aliceblue;">
           <h1><i class="bi bi-file-earmark-richtext text-danger"></i></h1>
-          <h5>Customized Fee Reports </h5>
+          <h5 style = "color: red">Customized Fee Reports </h5>
           <p>Create custom fee reports tailor-made for your institution  </p>
         </div>
-        <div class="col-md-3 text-center ">
+        <div class="col-md-3 text-center " style = "background-color: cornflowerblue; color: aliceblue;">
           <h1><i class="bi bi-megaphone text-success"></i></h1>
-          <h5>Timely Reminders  </h5>
+          <h5 style = "color: green">Timely Reminders  </h5>
           <p>Send and receive timely reminders regarding the next fee installment, absence of payment, the due date, etc </p>
         </div>
       </div>
 
       <hr>
 
-      <div class="row justify-content-evenly">
-        <div class="col-md-5 pt-5">
-         <h4 class="text-center mb-3">Fee Management System</h4>
-         <p class="text-center">FMS is one of the most automated fee calculation module.
+      <div class="row justify-content-evenly" style = "margin-bottom: 15px">
+        <div class="col-md-5 pt-5" style = "background-color: cornflowerblue">
+         <h4 class="text-center mb-3" style = "color: darkblue">Fees Management System</h4>
+         <p class="text-center" style = "color: aliceblue">FMS is one of the most automated fee calculation module.
            Apart from being automated it is, at the same time, flexible enough to accommodate the varying nature of fee payments that most of the educational institutions come across.
             The module automatically calculates the pending fees, previous fee payment details, deductions and concessions if any applicable to the selected student.</p>
         </div>
@@ -249,7 +250,7 @@
       <div class="section-area section-sp2" style="background:url('static/images/Background-bottom.webp'); padding-top: 40px; padding-bottom: 40px; margin: -12px;">
         <div class="container e-style">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4" style = "margin-top: 10px">
               <h3>Customizable Fee Structure</h3>
               <ul class="list-unstyled fee-sec3-list">
                 <li>
@@ -289,7 +290,7 @@
             </div>
 
             <div class="col-md-4">
-              <h3>Collect Fees Online</h3>
+              <h3>Collect Fee Online</h3>
               <ul class="list-unstyled fee-sec3-list">
                 <li>
                   Integrated payment gateways to automatically receive payments online & update student payment profile.
@@ -364,7 +365,7 @@
   
     <!--footer-->
 
-    <div class="row justify-content-evenly bg-dark text-white pt-2 pb-2">
+    <div class="row justify-content-evenly bg-dark text-white pt-2 pb-2" style = "margin:0px">
 
       <div class="col-md-3 pt-2">
         <h5 class="pb-2">FMS</h5>
@@ -382,6 +383,5 @@
           Noida - 201307</p>
       </div>
     </div>
-
   </body>
 </html>
